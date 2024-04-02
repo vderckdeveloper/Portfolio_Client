@@ -1,16 +1,31 @@
+import { Typewriter } from 'react-simple-typewriter'
 import Image from 'next/image';
 import MainProfileImage from '../../../public/image/main/240402_mainProfile_Ver1.0.png';
 import styles from '@/styles/Main/Main.module.css'
 
 function Main() {
 
+    const words: string[] = ['엔지니어입니다', '개발자입니다', '사업가입니다'];
+
     return (
         <article className={styles.container}>
             <div className={styles.wrapper}>
                 <div className={styles.leftSection}>
                     <div className={styles.textBox}>
-                        <h2>안녕하세요, 저는</h2>
-                        <h3>개발자입니다.</h3>
+                        <h2>안녕하세요!</h2>
+                        <div><p>저는 </p>
+                            <Typewriter
+                                 words={words}
+                                 loop={true}
+                                 typeSpeed={50}
+                                 deleteSpeed={50}
+                                 delaySpeed={1000}
+                                 cursor={true}
+                                 cursorStyle='|'
+                                 cursorColor='#ffffff'
+                                 cursorBlinking={true}
+                            />
+                        </div>
                         <p>비전공자로 시작해서, IT 업체를 창업하기까지 많은 노력이 필요했습니다. 웹 개발을 넘어, 인공지능까지 다양한 기술 기업 창업을 목표로 매진하고 있습니다.</p>
                     </div>
                     <div className={styles.skillSetBox}>
