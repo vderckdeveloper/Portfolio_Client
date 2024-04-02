@@ -36,11 +36,16 @@
     font-size: 40px;
 }
 
-.textBox > h3 {
+.textBox > div {
     margin-bottom: 30px;
     font-weight: 900;
     font-size: 40px;
     color: #ff014f;
+}
+
+.textBox > div > p {
+    display: inline;
+    color: white;
 }
 
 .textBox > p {
@@ -60,14 +65,24 @@
 
 .skillSet {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
+    width: calc(100% + 20px);
+    max-width: 500px;
 }
 
 .skillSet > svg {
+    flex-basis: calc(14.28% - 20px);
     margin: 0 20px 20px 0;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+  
+.skillSet > svg:hover {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 .skillSet:not(:last-child) {
@@ -96,8 +111,24 @@
         max-width: 400px;
     }
 
+    .skillSet > svg {
+        flex-basis: calc(16.6% - 20px);
+    }
+
     .imageBox {
         box-shadow: none;
+    }
+
+    .textBox > h2 {
+        font-size: 36px;
+    }
+
+    .textBox > div {
+        font-size: 36px;
+    }
+
+    .textBox > p {
+        font-size: 22px;
     }
 }
 
@@ -118,6 +149,10 @@
         margin-bottom: 0px;
     }
 
+    .skillSet > svg {
+        flex-basis: calc(20% - 20px);
+    }
+
     .rightSection {
         margin-bottom: 30px;
     }
@@ -126,5 +161,27 @@
         padding: 0;
     }
 
-    
+    .textBox > h2 {
+        font-size: 32px;
+    }
+
+    .textBox > div {
+        font-size: 32px;
+    }
+
+    .textBox > p {
+        font-size: 20px;
+    }
+}
+
+@media all and (max-width: 480px) { 
+    .skillSet > svg {
+        flex-basis: calc(25% - 20px);
+    }
+}
+
+@media all and (max-width: 400px) { 
+    .skillSet > svg {
+        flex-basis: calc(33.3% - 20px);
+    }
 }
