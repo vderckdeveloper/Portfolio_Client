@@ -2,11 +2,11 @@
 
 **`✅ This is a developer portfolio & blog project made with create-next-app ✅`** 
 
-Hey, there! I'm Seungmin Lee and I gotta say, I realized i need a new dev portfolio along with a tool to share my knowledge with others. Of course, putting it together was a whole vibe. 
+Hey, there! I'm Seungmin Lee and I gotta say, I realized i need a new dev portfolio along with a tool to share my knowledge with others.
 This project? it’s where my code meets creativity, fueled by dedication 🔥, late-night munchies 🌃 and the relentless pursuit of love 💞 toward programming. 
 
 Alright, so it didn’t take forever to build, but it’s packed with all the fun, challenges, and aha moments. 
-It’s like my digital diary but in code. Every piece of it tells a story of those "Let's just try this" ideas and "Oh cool, that actually worked! 💡"
+It’s like my digital diary but in code. Every piece of it tells a story of those "Let's just try this" ideas and "Oh cool, that actually worked!" 💡
 
 So, kick back, have a look, and enjoy the ride through my coding adventure. 
 And hey, if there’s one thing I’d love for you to take away from this, it’s that I’m all in on this **`programming gig 👨💖`**. 
