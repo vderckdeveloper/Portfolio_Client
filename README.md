@@ -8,7 +8,7 @@ This project? it’s where my code meets creativity, fueled by dedication 🔥 a
 Alright, so it didn’t take forever to build, but it’s packed with all the fun, challenges, and aha moments. 
 It’s like my digital diary but in code. Every piece of it tells a story of those "Let's just try this" ideas and "Oh cool, that actually worked!" moments 💡
 
-So, kick back, have a look, and enjoy the ride through **`my coding adventure 😎`** 
+So, kick back, have a look, and enjoy the ride through **`my coding adventure 😎` ** 
 
 &nbsp; 
 ## ⚙️ Installation
