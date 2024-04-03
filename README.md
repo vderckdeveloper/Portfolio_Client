@@ -1,40 +1,337 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 🎉 Intro
 
-## Getting Started
+**`✅ This is a developer portfolio & blog project made with create-next-app ✅`** 
 
-First, run the development server:
+Hey, there! I'm Seungmin Lee and I gotta say, I realized i need a new dev portfolio along with a tool to share my knowledge with others. Of course, putting it together was a whole vibe. 
+This project? It’s not just some academic exercise. It’s where my code meets creativity, fueled by dedication 🔥, late-night munchies 🌃 and the relentless pursuit of love 💞 toward programming. 
+
+Alright, so it didn’t take forever to build, but it’s packed with all the fun, challenges, and aha moments I’ve had along the way. 
+It’s like my digital diary but in code. Every piece of it tells a story of those "Let's just try this" ideas and "Oh cool, that actually worked! 💡" moments.
+
+Through this journey, I realized coding isn’t just about getting the job done. It’s about those small victories 🎯, the times you wanna high-five yourself because something finally works. 
+It’s a bit of dedication, a sprinkle of frustration, and a whole lot of "ultimate joy 💕" 
+
+So, kick back, have a look, and enjoy the ride through my coding adventure. 
+It’s been an awesome mix of learning, experimenting, and, let’s be honest, "a way of life 🚀".
+
+And hey, if there’s one thing I’d love for you to take away from this, it’s that I’m all in on this **`programming gig 👨💖`**. 
+Not just for the brain teasers but for the sheer joy of creating something out of nothing. Cheers to more coding escapades!
+
+&nbsp; 
+## ⚙️ Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# clone the repoistory
+git clone https://github.com/vderckdeveloper/portfolio.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+# navigate to the project directory 
+cd /your-project-route
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+# install dependencies
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+&nbsp; 
+## 🚀 Start
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Run the server:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+# development mode
+npm run dev
+```
 
-## Learn More
+```bash
+# production mode
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# pm2 start mode
+pm2 start ecosystem.config.js
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+&nbsp; 
+## 📁 Folder Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+│  .env.development                  // environment variable - development mode 
+│  .env.production                   // environment variable - production mode
+│  .eslintrc.json                    // eslint config
+│  .gitignore                        // git ignore config
+│  ecosystem.config.js               // pm2 config     
+│  jsconfig.json                     // js config
+│  next-sitemap.config.js            // next site map config
+│  next.config.js                    // next js config
+│  package-lock.json                 // package lock json
+│  package.json                      // package json
+│  README.md                         // README.md
+│  
+├─es5module                          // es5 module  
+├─public                             // static files
+│  ├─appicon                         // app icon
+│  │  ├─androidicon
+│  │  ├─iosicon
+│  │  ├─logo
+│  │  └─windowsicon
+│  │          
+│  ├─fonts                           // fonts
+│  └─Image                           // image
+│      ├─About
+│      ├─AI
+│      ├─BecomeCreator
+│      ├─BootCamp
+│      │  └─ITBusinessEstablishment
+│      ├─Class
+│      │  └─Creater
+│      ├─ClassReview
+│      ├─Creator
+│      │  ├─Main     
+│      │  └─MyClass
+│      │          
+│      ├─Event
+│      │  └─EventList
+│      │      ├─BasicDiscount
+│      │      └─GiveawayBenefit
+│      │              
+│      ├─IosInstallGuide
+│      ├─KakaoSns
+│      ├─Logo
+│      ├─MainBanner
+│      ├─Notification
+│      ├─OpenGraph
+│      ├─Outline
+│      │  ├─EnglishEntryMrReply
+│      │  ├─HtmlAnyoneCanDo
+│      │  ├─JavascriptAnyoneCanDo
+│      │  ├─PremierproAnyoneCanDo
+│      │  ├─VietnameseBeginnerToIntermediate
+│      │  ├─VietnameseEntry
+│      │  └─VietnameseOPIEntry
+│      ├─Payment
+│      ├─Perspective
+│      │  ├─AIChatbotGuideContent
+│      │  ├─DeepLearningGuideContent
+│      │  └─ProgrammingBusinessGuideContent
+│      ├─sharedComponent
+│      │  └─Cardview
+│      ├─Signup
+│      └─User
+│              
+├─sentry                            // sentry logging
+│      
+├─src                               // all component
+│  ├─component                      // component
+│  │  ├─404
+│  │  ├─About
+│  │  ├─Admin
+│  │  │  ├─Dashboard
+│  │  │  │  ├─Class
+│  │  │  │  ├─ClassOutline
+│  │  │  │  ├─ClassReview    
+│  │  │  │  ├─ClassSuggestion   
+│  │  │  │  ├─Coupon 
+│  │  │  │  ├─Creator    
+│  │  │  │  ├─Monitor 
+│  │  │  │  ├─Overview 
+│  │  │  │  ├─Payout   
+│  │  │  │  ├─Promotion 
+│  │  │  │  ├─SalesRevenue  
+│  │  │  │  └─User 
+│  │  │  ├─Login
+│  │  │  └─Main   
+│  │  ├─AI
+│  │  ├─BootCamp
+│  │  │  └─ITBusinessEstablishment
+│  │  ├─Cart
+│  │  ├─Class
+│  │  │  ├─Announcement  
+│  │  │  ├─ClassReview   
+│  │  │  ├─Creater   
+│  │  │  ├─Curriculum
+│  │  │  ├─LearningMaterial
+│  │  │  ├─Outline
+│  │  │  │  ├─EnglishEntryMrReply
+│  │  │  │  ├─HtmlAnyoneCanDo
+│  │  │  │  ├─JavascriptAnyoneCanDo
+│  │  │  │  ├─PremierproAnyoneCanDo
+│  │  │  │  ├─VietnameseBeginnerToIntermediate
+│  │  │  │  ├─VietnameseEntry
+│  │  │  │  ├─VietnameseIntermediateToAdvanced
+│  │  │  │  └─VietnameseOPIEntry
+│  │  │  ├─SnsShare
+│  │  │  └─Summary
+│  │  ├─Contact
+│  │  ├─Creator
+│  │  │  ├─ForgotPassword
+│  │  │  ├─Login   
+│  │  │  ├─Main
+│  │  │  ├─MyClass
+│  │  │  ├─Notification
+│  │  │  ├─PasswordReset
+│  │  │  ├─Profile
+│  │  │  ├─Sales
+│  │  │  └─Signup
+│  │  ├─CustomError
+│  │  ├─Event
+│  │  │  ├─BasicDiscount
+│  │  │  └─GiveawayBenefit
+│  │  ├─ForgotPassword
+│  │  ├─Login
+│  │  ├─Main
+│  │  ├─MyClass
+│  │  ├─Notification
+│  │  ├─Offline
+│  │  ├─PasswordReset
+│  │  ├─payments
+│  │  ├─Perspective
+│  │  ├─PrivacyPolicy
+│  │  ├─Profile
+│  │  ├─Search
+│  │  ├─Signup
+│  │  ├─TermsOfService
+│  │  └─WarningMessage
+│  │          
+│  ├─pages                        // pages
+│  │  ├─about
+│  │  ├─admin
+│  │  │  ├─dashboard
+│  │  │  └─login      
+│  │  ├─api
+│  │  ├─bootcamp
+│  │  ├─cart
+│  │  ├─class     
+│  │  ├─contact
+│  │  ├─creator
+│  │  │  ├─forgotpassword
+│  │  │  ├─login
+│  │  │  ├─main
+│  │  │  ├─myclass
+│  │  │  ├─passwordreset
+│  │  │  ├─profile
+│  │  │  ├─sales
+│  │  │  └─signup
+│  │  ├─event
+│  │  │  ├─basicdiscount
+│  │  │  └─giveawaybenefit
+│  │  ├─forgotpassword
+│  │  ├─login  
+│  │  ├─myclass
+│  │  ├─passwordreset
+│  │  ├─payments
+│  │  ├─perspective
+│  │  ├─privacypolicy
+│  │  ├─profile
+│  │  ├─search
+│  │  ├─signup
+│  │  ├─sitemap
+│  │  └─termsofservice
+│  │          
+│  ├─redux                         // redux state management
+│  │      
+│  ├─shardComponentStyles          // shared component 
+│  │  ├─Accordian
+│  │  ├─Block
+│  │  ├─BootCamp
+│  │  ├─Cardview  
+│  │  └─Caution
+│  │          
+│  ├─sharedComponent               // shared component styles 
+│  │  ├─Accordian
+│  │  ├─Block
+│  │  ├─BootCamp
+│  │  ├─Cardview
+│  │  └─Caution
+│  │          
+│  ├─styles                        // styles
+│  │  ├─404
+│  │  ├─About
+│  │  ├─Admin
+│  │  │  ├─Dashboard
+│  │  │  │  ├─Class
+│  │  │  │  ├─ClassOutline
+│  │  │  │  ├─ClassReview
+│  │  │  │  ├─ClassSuggestion
+│  │  │  │  ├─Coupon
+│  │  │  │  ├─Creator 
+│  │  │  │  ├─Monitor   
+│  │  │  │  ├─Overview  
+│  │  │  │  ├─Payout  
+│  │  │  │  ├─Promotion    
+│  │  │  │  ├─SalesRevenue   
+│  │  │  │  └─User   
+│  │  │  ├─Login
+│  │  │  └─Main   
+│  │  ├─AI 
+│  │  ├─BootCamp
+│  │  ├─Cart
+│  │  ├─Class
+│  │  │  ├─Announcement
+│  │  │  ├─ClassReview
+│  │  │  ├─Creater
+│  │  │  ├─Curriculum
+│  │  │  ├─LearningMaterial
+│  │  │  ├─Outline
+│  │  │  │  └─EnglishEntryMrReply
+│  │  │  ├─SnsShare
+│  │  │  └─Summary
+│  │  ├─Contact
+│  │  ├─Creator
+│  │  │  ├─ForgotPassword
+│  │  │  ├─Login
+│  │  │  ├─Main
+│  │  │  ├─MyClass
+│  │  │  ├─Notification
+│  │  │  ├─PasswordReset
+│  │  │  ├─Profile
+│  │  │  ├─Sales
+│  │  │  └─Signup
+│  │  ├─CustomError
+│  │  ├─Event
+│  │  │  ├─BasicDiscount
+│  │  │  └─GiveawayBenefit
+│  │  ├─ForgotPassword
+│  │  ├─Login
+│  │  ├─Main
+│  │  ├─MyClass
+│  │  ├─Notification
+│  │  ├─Offline
+│  │  ├─PasswordReset
+│  │  ├─payments
+│  │  ├─Perspective
+│  │  ├─PrivacyPolicy
+│  │  ├─Profile
+│  │  ├─Search
+│  │  ├─Signup
+│  │  ├─TermsOfService
+│  │  └─WarningMessage
+│  └─worker                         // background worker - progressive web application
+└─utils                             // utility function
+```
 
-## Deploy on Vercel
+&nbsp; 
+## 🌐 OFFICAL WEBSITE (TBA)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Link below will be updated later 
+Open [https://seungminleeportfolio.com](https://seungminleeportfolio.com)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+&nbsp; 
+## 🔒 LICENSE
+
+- This project and all of its contents are the sole property of **`SEUNGMIN LEE`**.
+- The software is provided as-is without warranty of any kind, express or implied. 
+- No license is granted for reuse, modification, distribution, or commercial use by other parties without explicit written permission from **`SEUNGMIN LEE`**.
+- This project is proprietary software intended exclusively for use by **`SEUNGMIN LEE`**, and any access, use, modification, or distribution by anyone other than **`SEUNGMIN LEE`** is strictly prohibited.
+- For any inquiries regarding the use, distribution, or modification of this project, please contact **`SEUNGMIN LEE`**.
+
+&nbsp; 
+## 📞 CONTACT
+
+**`SEUNGMIN LEE`**
+
+- **📩 Email**: [vderckdeveloper@gmail.com](mailto:vderckdeveloper@gmail.com)
+- **📱 Phone**: +82 010 7303 5185 
