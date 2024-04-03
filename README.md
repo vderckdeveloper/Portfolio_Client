@@ -9,7 +9,7 @@ Alright, so it didn’t take forever to build, but it’s packed with all the fu
 It’s like my digital diary but in code. Every piece of it tells a story of those "Let's just try this" ideas and "Oh cool, that actually worked!" moments 💡
 
 So, kick back, have a look, and enjoy the ride through my coding adventure. 
-And hey, if there’s one thing I’d love for you to take away from this, it’s that I’m all in on this **`programming gig 👨💖`**. 
+And hey, if there’s one thing I’d love for you to take away from this, it’s that I’m all in on this **`Programming Gig 👨💖`**. 
 
 &nbsp; 
 ## ⚙️ Installation
