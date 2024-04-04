@@ -4,7 +4,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 50px 0;
+    margin: 50px 0 0 0;
 }
 
 .wrapper {
@@ -14,9 +14,8 @@
     align-items: center;
     max-width: 1440px;
     padding: 50px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     background: #25282b;
-    box-shadow: 0 1px 5px rgb(145 145 145 / 30%);
 }
 
 /* left section */
