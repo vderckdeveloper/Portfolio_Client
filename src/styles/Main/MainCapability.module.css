@@ -30,7 +30,6 @@
 .cardview::before {
     content: "";
     position: absolute;
-    transition: 0.4s;
     width: 100%;
     height: 100%;
     border-radius: 10px;
