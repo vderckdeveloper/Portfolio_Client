@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.wrapper {
+    width: 80%;
+    max-width: 1440px;
+}
+
+.cardviewBox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 350px);
+    gap: 30px;
+}
+
+.cardview {
+    position: relative;
+    padding: 30px;
+    background-color: linear-gradient(145deg, #1e2024, #23272b);
+    box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
+    cursor: grab;
+}
+
+.cardview::before {
+    content: "";
+    position: absolute;
+    transition: 0.4s;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right bottom, #212428, #16181c);
+    opacity: 0;
+    z-index: -1;
+}
+
+.cardview:hover::before {
+    opacity: 1;
+}
+
+.cardview > * {
+    color: #c4cfde;
+    transition: 700ms cubic-bezier(0.17, 0.67, 0, 1.01);
+    transform: translateY(20px);
+}
+
+.cardview:hover > * {
+    color: white;
+    transform: translateY(0px);
+}
+
+.cardview > svg:first-child {
+    margin: 20px 0 30px 0;
+}
+
+.cardview > h2 {
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+.cardview > p {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.cardview > svg:nth-child(4) {
+    margin-top: 20px;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.cardview:hover > svg:nth-child(4) {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+}
+
+@media all and (max-width: 1080px) {
+    .cardviewBox {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 350px);
+    }
+}
+
+@media all and (max-width: 640px) { 
+    .cardviewBox {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 350px);
+    }
+}
