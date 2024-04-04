@@ -1,19 +1,26 @@
-interface CenterDescriptionProps {
-    title: string;
-    content: string;
+import styles from '@/sharedComponentStyle/Description/CenterDescription.module.css';
+
+interface CenterDescriptionContent {
+    content: {
+        title: string;
+        body: string;
+    }
 }
 
-function CenterDescription(props: CenterDescriptionProps) {
+function CenterDescription(props: CenterDescriptionContent) {
 
-    const title = props.title;
     const content = props.content;
+    const title = content.title;
+    const body = content.body;
 
-    return(
-        <article>
-            <div>
-                <h2>{title}</h2>
-                <p>{content}</p>
-            </div>    
+    return (
+        <article className={styles.container}>
+            <div className={styles.wrapper}>
+                <div className={styles.textBox}>
+                    <h2>{title}</h2>
+                    <p>{body}</p>
+                </div>
+            </div>
         </article>
     );
 }
