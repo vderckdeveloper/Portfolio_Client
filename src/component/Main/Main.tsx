@@ -4,6 +4,7 @@ import LineBoundary from "@/sharedComponent/Boundary/LineBoundary";
 import LeftDescription from "@/sharedComponent/Description/LeftDescription";
 import MainCapability from "./MainCapability";
 import CenterDescription from "../../sharedComponent/Description/CenterDescription";
+import MainProject from "./MainProject";
 
 interface LeftDescriptionContent {
     title: string;
@@ -35,6 +36,7 @@ function Main() {
             <LeftDescription content={LeftDescriptionContent}/>
             <MainCapability />
             <CenterDescription content={CenterDescriptionContent}/>
+            <MainProject />
         </>
     );
 }
