@@ -27,9 +27,11 @@
     font-weight: 900;
     font-size: 36px;
     color: #ff014f;
+    text-align: center;
 }
 
 .textBox > p {
     font-weight: 700;
     font-size: 28px;
+    text-align: center;
 }
