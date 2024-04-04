@@ -23,6 +23,9 @@ function MainProject() {
                         </div>
                         <div className={styles.textBox}>
                             <p>서울 유 에듀 공식 프로젝트 - 온라인 디지털 컨텐츠 플랫폼</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 17L17 7M17 7H8M17 7V16" stroke="#ff014f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
                         </div>
                     </div>
                     <div className={styles.cardview}>
@@ -40,6 +43,9 @@ function MainProject() {
                         </div>
                         <div className={styles.textBox}>
                             <p>서울 유 에듀 공식 프로젝트 - 온라인 디지털 컨텐츠 플랫폼</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 17L17 7M17 7H8M17 7V16" stroke="#ff014f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
                         </div>
                     </div>
                     <div className={styles.cardview}>
@@ -57,6 +63,9 @@ function MainProject() {
                         </div>
                         <div className={styles.textBox}>
                             <p>서울 유 에듀 공식 프로젝트 - 온라인 디지털 컨텐츠 플랫폼</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 17L17 7M17 7H8M17 7V16" stroke="#ff014f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
                         </div>
                     </div>
                 </div>

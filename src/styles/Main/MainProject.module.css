@@ -39,7 +39,6 @@
     left: 0;
     background: linear-gradient(to right bottom, #212428, #16181c);
     opacity: 0;
-    transition: 0.4s;
 }
 
 .cardview:hover::before {
@@ -88,24 +87,55 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: 0.6s;
+}
+
+.categoryBox > div:hover {
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .categoryBox > div > svg {
     margin-right: 10px;
 }
 
+.categoryBox > div:hover > svg > path {
+    fill: #ffffff;
+    transition: 0.6s;
+}
+
+.categoryBox > div:hover > svg > path {
+    fill: #ff014f;
+}
+
 /* text box */
 .textBox > p {
+    display: inline;
     font-weight: 800;
     font-size: 20px;
     word-break: keep-all;
-    line-height: 24px;
+    line-height: 28px;
     transition: 0.4s;
 }
 
 .textBox:hover > p {
     color: #ff014f;
 } 
+
+.textBox > svg {
+    position: relative;
+    display: inline;
+    width: 0;
+    vertical-align: top;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.textBox:hover > svg {
+    width: 28px;
+    opacity: 1;
+}
 
 @media all and (max-width: 1240px) {
     .cardviewBox {
