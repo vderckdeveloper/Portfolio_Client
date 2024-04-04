@@ -1,0 +1,122 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.wrapper {
+    width: 80%;
+    max-width: 1440px;
+}
+
+/* cardview box */
+.cardviewBox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 100%);
+    gap: 30px;
+}
+
+.cardview {
+    position: relative;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: linear-gradient(145deg, #1e2024, #23272b);
+    box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
+    cursor: pointer;
+}
+
+.cardview::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right bottom, #212428, #16181c);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.cardview:hover::before {
+    opacity: 1;
+}
+
+/* image box */
+.imageBox {
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.imageBox > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .4s ease-in-out;
+    transition: .4s ease-in-out;
+}
+
+.cardview:hover > .imageBox > img {
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+}
+
+/* category box */
+.categoryBox {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categoryBox > p {
+    font-weight: 800;
+    color: #ff014f;   
+}
+
+.categoryBox > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.categoryBox > div > svg {
+    margin-right: 10px;
+}
+
+/* text box */
+.textBox > p {
+    font-weight: 800;
+    font-size: 20px;
+    word-break: keep-all;
+    line-height: 24px;
+    transition: 0.4s;
+}
+
+.textBox:hover > p {
+    color: #ff014f;
+} 
+
+@media all and (max-width: 1240px) {
+    .cardviewBox {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+    }
+}
+
+@media all and (max-width: 768px) { 
+    .cardviewBox {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(3, auto);
+    }
+}
