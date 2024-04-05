@@ -1,5 +1,7 @@
 import Image from 'next/image';
-import seoulUeduProjectCoverImage from '../../../public/image/main/mainProject/240404_seoulUEdu_projectCover_image.jpg';
+import seoulUeduProjectCoverImage from '../../../public/image/main/mainProject/240404_seoulUEdu_projectCover_image.png';
+import portfolioProjectCoverImage from '../../../public/image/main/mainProject/240404_portfolio_projectCover_image.png';
+import rebelProjectCoverImage from '../../../public/image/main/mainProject/240404_rebel_projectCover_image.png';
 import styles from '@/styles/Main/MainProject.module.css';
 
 function MainProject() {
@@ -10,7 +12,7 @@ function MainProject() {
                 <div className={styles.cardviewBox}>
                     <div className={styles.cardview}>
                         <div className={styles.imageBox}>
-                            <Image src={seoulUeduProjectCoverImage} width={340} height={250} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
+                            <Image src={seoulUeduProjectCoverImage} width={400} height={295} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
                         </div>
                         <div className={styles.categoryBox}>
                             <p>Gallery</p>
@@ -30,7 +32,7 @@ function MainProject() {
                     </div>
                     <div className={styles.cardview}>
                         <div className={styles.imageBox}>
-                            <Image src={seoulUeduProjectCoverImage} width={340} height={250} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
+                            <Image src={portfolioProjectCoverImage} width={400} height={295} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
                         </div>
                         <div className={styles.categoryBox}>
                             <p>Gallery</p>
@@ -42,7 +44,7 @@ function MainProject() {
                             </div>
                         </div>
                         <div className={styles.textBox}>
-                            <p>서울 유 에듀 공식 프로젝트 - 온라인 디지털 컨텐츠 플랫폼</p>
+                            <p>개인 프로젝트 - 포트폴리오 및 블로그</p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
                                 <path d="M7 17L17 7M17 7H8M17 7V16" stroke="#ff014f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
@@ -50,7 +52,7 @@ function MainProject() {
                     </div>
                     <div className={styles.cardview}>
                         <div className={styles.imageBox}>
-                            <Image src={seoulUeduProjectCoverImage} width={340} height={250} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
+                            <Image src={rebelProjectCoverImage} width={400} height={295} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
                         </div>
                         <div className={styles.categoryBox}>
                             <p>Gallery</p>
@@ -62,7 +64,7 @@ function MainProject() {
                             </div>
                         </div>
                         <div className={styles.textBox}>
-                            <p>서울 유 에듀 공식 프로젝트 - 온라인 디지털 컨텐츠 플랫폼</p>
+                            <p>REBEL 공식 프로젝트 - 인터네셔널 커뮤니티 플랫폼</p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
                                 <path d="M7 17L17 7M17 7H8M17 7V16" stroke="#ff014f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
