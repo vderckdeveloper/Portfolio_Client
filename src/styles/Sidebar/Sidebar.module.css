@@ -32,7 +32,7 @@
 }
 
 .categoryBox > ol > a:not(:last-child) {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .categoryBox > ol > a > li {
