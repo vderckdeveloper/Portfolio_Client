@@ -1,3 +1,4 @@
+import Toolbar from "../Toolbar/Toolbar";
 import MainProfie from "./MainProfile";
 import BottomMargin from "@/sharedComponent/Margin/BottomMargin";
 import LineBoundary from "@/sharedComponent/Boundary/LineBoundary";
@@ -32,6 +33,7 @@ function MainBody() {
 
     return (
         <section className={styles.wrapper}>
+            <Toolbar />
             <MainProfie />
             <LineBoundary />
             <BottomMargin />
