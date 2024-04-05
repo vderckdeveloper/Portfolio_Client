@@ -2,7 +2,67 @@
     position: sticky;
     top: 0;
     left: 0;
-    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 350px;
     height: 100vh;
+    border-right: 1px solid #121415;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 50px 0;
+}
+
+/* category box */
+.categoryBox {
+    width: 100%;
+}
+
+.categoryBox > ol > a {
+    display: block;
+    text-decoration: none;
+    color: #c4cfde;
+}
+
+.categoryBox > ol > a:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.categoryBox > ol > a > li {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.categoryBox > ol > a > li:hover {
+    color: #ff014f;
+}
+
+.categoryBox > ol > a > li > svg {
+    margin-right: 15px;
+    transition: 0.4s;
+}
+
+.categoryBox > ol > a > li:hover > svg {
+    stroke: #ff014f;
+}
+
+.categoryBox > ol > a > li > p {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+@media all and (max-width: 1080px) {
+    .container {
+        display: none;
+    }
+}
