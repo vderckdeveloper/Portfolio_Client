@@ -12,6 +12,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 100%;
     max-width: 1440px;
     padding: 50px;
     border-radius: 10px 10px 0 0;
@@ -21,7 +22,7 @@
 /* left section */
 .leftSection {
     margin-right: 50px;
-    max-width: 500px;
+    max-width: 400px;
 }
 
 /* textBox */
@@ -70,7 +71,7 @@
 }
 
 .skillSet > svg {
-    flex-basis: calc(14.28% - 20px);
+    flex-basis: calc(20% - 20px);
     margin: 0 20px 20px 0;
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -107,11 +108,11 @@
 
 @media all and (max-width: 1440px) {
     .leftSection {
-        max-width: 400px;
+        max-width: 320px;
     }
 
     .skillSet > svg {
-        flex-basis: calc(16.6% - 20px);
+        flex-basis: calc(25% - 20px);
     }
 
     .imageBox {
@@ -182,5 +183,13 @@
 @media all and (max-width: 400px) { 
     .skillSet > svg {
         flex-basis: calc(33.3% - 20px);
+    }
+
+    .textBox > h2 {
+        font-size: 26px;
+    }
+
+    .textBox > div {
+        font-size: 26px;
     }
 }
