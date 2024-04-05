@@ -1,13 +1,14 @@
+import styles from '@/styles/Toolbar/Toolbar.module.css';
+
 function Toolbar() {
     
     return (
-
-        <nav>
-            <div>
-                검색창
+        <section className={styles.container}>
+            <div className={styles.wrapper}>
+                <p>검색창</p>
             </div>
-        </nav>
-
+        </section>
     );
 }
+
 export default Toolbar;
