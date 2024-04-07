@@ -49,20 +49,20 @@ function Toolbar() {
 
         if (searchBarInputNode) {
             searchBarInputNode.addEventListener("focus", () => {
-                searchBarFrameNode.style.background = "white";
+                searchBarFrameNode.style.background = "#383b3e";
             });
             searchBarInputNode.addEventListener("blur", () => {
-                searchBarFrameNode.style.background = '#efefef';
+                searchBarFrameNode.style.background = '#333637';
             });
         }
 
         return () => {
             if (searchBarInputNode) {
                 searchBarInputNode.removeEventListener("focus", () => {
-                    searchBarFrameNode.style.background = "white";
+                    searchBarFrameNode.style.background = "#383b3e";
                 });
                 searchBarInputNode.removeEventListener("blur", () => {
-                    searchBarFrameNode.style.background = "#efefef";
+                    searchBarFrameNode.style.background = "#333637";
                 });
             }
         };
@@ -74,8 +74,8 @@ function Toolbar() {
             <div className={styles.wrapper}>
                 <div className={styles.searchBar} ref={searchBarFrameRef}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="10.5" cy="10.5" r="6.5" stroke="#ABABAB" strokeWidth="1.5"></circle>
-                        <path d="M15.5 15.5L20 20" stroke="#ABABAB" strokeWidth="1.5" strokeLinecap="round"></path>
+                        <circle cx="10.5" cy="10.5" r="6.5" stroke="#D6D6D6" strokeWidth="1.5"></circle>
+                        <path d="M15.5 15.5L20 20" stroke="#D6D6D6" strokeWidth="1.5" strokeLinecap="round"></path>
                     </svg>
                     <input type='text' maxLength={30} placeholder="찾고싶은 지식을 입력해주세요." onChange={onSearch} onKeyDown={onSearchSubmit} ref={searchBarInputRef}></input>
                     {
