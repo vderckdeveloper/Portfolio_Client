@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 50px;
 }
 
 .wrapper {
@@ -12,5 +13,42 @@
     justify-content: center;
     align-items: center;
     width: 80%;
+}
+
+/* search bar */
+.searchBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px 15px;
+    width: 350px;
+    height: 2rem;
+    border-radius: 15px;
+    background: #efefef;
+}
+  
+.searchBar:hover {
+    background: #d6d6d6;
+}
+  
+.searchBar > svg {
+    margin-right: 12px;
+}
+  
+.searchBar > input {
+    width: 250px;
+    border: 0px;
+    font-family: 'AppleSDGothicNeo';
+    font-size: 15px;
+    background: rgba(0, 0, 0, 0);
+}
+  
+.searchBar > input:focus {
+    outline: none;
+}
+  
+.searchBar > svg:nth-child(3):hover{
+    cursor: pointer;
 }
 
