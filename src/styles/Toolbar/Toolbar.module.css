@@ -25,11 +25,11 @@
     width: 350px;
     height: 2rem;
     border-radius: 15px;
-    background: #efefef;
+    background: #383b3e;
 }
   
 .searchBar:hover {
-    background: #d6d6d6;
+    background: #464a4f;
 }
   
 .searchBar > svg {
@@ -41,7 +41,12 @@
     border: 0px;
     font-family: 'AppleSDGothicNeo';
     font-size: 15px;
+    color: white;
     background: rgba(0, 0, 0, 0);
+}
+
+.searchBar > input::placeholder {
+    color: #D6D6D6;
 }
   
 .searchBar > input:focus {
@@ -52,3 +57,19 @@
     cursor: pointer;
 }
 
+@media all and (max-width: 400px) {
+    .searchBar {
+        width: 265px;
+        min-width: 265px;
+    }
+
+    .searchBar > svg {
+        min-width: 24px;
+        min-height: 24px;
+    }
+
+    .searchBar > input {
+        margin-right: 15px;
+        width: 180px;
+    }
+}
