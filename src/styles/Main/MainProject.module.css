@@ -101,13 +101,17 @@
     margin-right: 10px;
 }
 
-.categoryBox > div:hover > svg > path {
-    fill: #ffffff;
+.categoryBox > div:hover > svg > g > path {
+    stroke: #ffffff;
     transition: 0.6s;
 }
 
-.categoryBox > div:hover > svg > path {
-    fill: #ff014f;
+.categoryBox > div:hover > svg > g > path {
+    stroke: #ff014f;
+}
+
+.categoryBox > div > span {
+    padding-top: 4px;
 }
 
 /* text box */
