@@ -38,14 +38,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
+    // const data = await response.json();
     const data = await response.json();
 
-    const checkLoginStatus = data.checkLoginStatus;
-    const userId = data.userId;
-    const lectureData = data.lectureData;
-    const mainLectureReviewData = data.mainLectureReviewData;
+    console.log(data);
 
-    return { props: { userId: userId, lectureData: lectureData, mainLectureReviewData: mainLectureReviewData } };
+    const checkLoginStatus = data.checkLoginStatus;
+
+    return { props: { } };
 
   } catch (err) {
 
