@@ -41,16 +41,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     // const data = await response.json();
     const data = await response.json();
 
-    const test = await fetch(`${process.env.NEXT_PUBLIC_URL_ON_SERVER_SIDE_PROPS}/getAdminPage`, {
-      method: 'GET',
-      headers: {
-        Cookie: cookie
-      },
-      cache: 'no-store'
-    });
-
-    console.log(await test.json());
-
     console.log(data);
 
     const checkLoginStatus = data.checkLoginStatus;
