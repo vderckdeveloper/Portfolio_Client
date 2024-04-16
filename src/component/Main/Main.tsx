@@ -32,7 +32,7 @@ function Main(props: MainProps) {
     return (
         <section className={styles.wrapper}>
             <Sidebar blogData={blogData} />
-            <MainBody />
+            <MainBody blogData={blogData} />
         </section>
     );
 }

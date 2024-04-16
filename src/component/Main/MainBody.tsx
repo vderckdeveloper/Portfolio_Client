@@ -10,6 +10,28 @@ import MainProject from "./MainProject";
 
 import styles from '@/styles/Main/MainBody.module.css';
 
+interface BlogData {
+    blog_index: number;
+    blog_uniqueNum: number;
+    admin_identification: string;
+    blog_category: string;
+    blog_title: string;
+    blog_content: string;
+    register_date: string;
+    edit_date: string;
+    delete_date: string;
+    register_ip: string;
+    edit_ip: string;
+    delete_ip: string;
+    blog_is_deleted: boolean;
+    blog_is_approved: boolean;
+}
+
+interface MainBodyProps {
+    blogData: BlogData[];
+    error?: string;
+}
+
 interface LeftDescriptionContent {
     title: string;
     body: string;
@@ -20,7 +42,10 @@ interface CenterDescriptionContent {
     body: string;
 }
 
-function MainBody() {
+function MainBody(props: MainBodyProps) {
+
+    // page props
+    const blogData = props.blogData;
 
     const LeftDescriptionContent: LeftDescriptionContent = {
         title: '전문 능력',
@@ -34,7 +59,7 @@ function MainBody() {
 
     return (
         <section className={styles.wrapper}>
-            <MobileToolbar />
+            <MobileToolbar blogData={blogData} />
             <Toolbar />
             <MainProfie />
             <LineBoundary />
