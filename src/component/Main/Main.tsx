@@ -2,11 +2,36 @@ import Sidebar from "../Sidebar/Sidebar";
 import MainBody from "./MainBody";
 import styles from '@/styles/Main/Main.module.css';
 
-function Main() {
+interface BlogData {
+    blog_index: number;
+    blog_uniqueNum: number;
+    admin_identification: string;
+    blog_category: string;
+    blog_title: string;
+    blog_content: string;
+    register_date: string;
+    edit_date: string;
+    delete_date: string;
+    register_ip: string;
+    edit_ip: string;
+    delete_ip: string;
+    blog_is_deleted: boolean;
+    blog_is_approved: boolean;
+}
+
+interface MainProps {
+    blogData: BlogData[];
+    error?: string;
+}
+
+function Main(props: MainProps) {
+
+    // page props
+    const blogData = props.blogData;
 
     return (
         <section className={styles.wrapper}>
-            <Sidebar />
+            <Sidebar blogData={blogData} />
             <MainBody />
         </section>
     );
