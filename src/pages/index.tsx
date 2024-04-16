@@ -6,7 +6,14 @@ import Main from "@/component/Main/Main";
 // type
 import { GetServerSidePropsContext } from 'next';
 
-export default function Home() {
+interface HomeProps {
+  adminId: string;
+  checkLoginStatus: boolean;
+  blogData: [];
+  error?: string;
+}
+
+export default function Home({ adminId, checkLoginStatus, blogData, error }: HomeProps) {
   return (
     <>
       <Head>
@@ -15,7 +22,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Main />
+      <Main blogData={blogData} error={error} />
     </>
   );
 }
@@ -41,24 +48,24 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     // const data = await response.json();
     const data = await response.json();
 
-    console.log(data);
-
+    const adminId = data.adminId;
     const checkLoginStatus = data.checkLoginStatus;
+    const blogData = data.blogData;
 
-    return { props: {} };
+    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData } };
 
   } catch (err) {
 
     // fall back data 
     const fallBackData = {
-      userId: '',
-      lectureData: [],
-      mainLectureReviewData: [],
+      adminId: '',
+      checkLoginStatus: false,
+      blogData: [],
     };
 
-    const userId = fallBackData.userId;
-    const lectureData = fallBackData.lectureData;
-    const mainLectureReviewData = fallBackData.mainLectureReviewData;
+    const adminId = fallBackData.adminId;
+    const checkLoginStatus = fallBackData.checkLoginStatus;
+    const blogData = fallBackData.blogData;
 
     // log error
     console.log(err);
@@ -66,7 +73,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const error = err as Error;
     const errorMessage = error.message;
 
-    return { props: { userId: userId, lectureData: lectureData, mainLectureReviewData: mainLectureReviewData, error: errorMessage } };
+    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, error: errorMessage } };
   }
 
 }
