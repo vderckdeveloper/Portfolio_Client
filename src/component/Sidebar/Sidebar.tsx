@@ -1,23 +1,68 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import sidebarProfileImage from '../../../public/image/sidebar/240405_sidebarProfile_Image_Ver1.0.png';
 import styles from '@/styles/Sidebar/Sidebar.module.css';
 
-function Sidebar() {
+interface BlogData {
+    blog_index: number;
+    blog_uniqueNum: number;
+    admin_identification: string;
+    blog_category: string;
+    blog_title: string;
+    blog_content: string;
+    register_date: string;
+    edit_date: string;
+    delete_date: string;
+    register_ip: string;
+    edit_ip: string;
+    delete_ip: string;
+    blog_is_deleted: boolean;
+    blog_is_approved: boolean;
+}
 
-    const MenuItems = {
-        HOME: 'HOME',
-        DATA_STRUCTURE: 'DATA_STRUCTURE',
-        ALGORITHM: 'ALGORITHM',
-        JAVASCRIPT: 'JAVASCRIPT',
-        TYPESCRIPT: 'TYPESCRIPT',
-        REACT: 'REACT',
-        NEXTJS: 'NEXTJS'
+interface CategoryMap {
+    [key: string]: BlogData[];
+}
+
+interface SidebarProps {
+    blogData: BlogData[];
+    error?: string;
+}
+
+function Sidebar(props: SidebarProps) {
+
+    // page props
+    const blogData = props.blogData;
+
+    // home menu
+    const homeMenu = 'HOME';
+
+    // state
+    const [menu, setMenu] = useState(homeMenu);
+    const [openCategory, setOpenCategory] = useState<Record<string, boolean>>({});
+
+    // blog category data
+    const categoryData = useMemo(() => {
+        const categoryMap: CategoryMap = {};
+        blogData.forEach(blog => {
+            if (!categoryMap[blog.blog_category]) {
+                categoryMap[blog.blog_category] = [];
+            }
+            categoryMap[blog.blog_category].push(blog);
+        });
+        return categoryMap;
+    }, [blogData]);
+
+    // blog menu list
+    const menuList = Object.entries(categoryData);
+
+    const toggleCategory = (category: string) => {
+        setOpenCategory(prevState => ({
+            ...prevState,
+            [category]: !prevState[category]
+        }));
     };
-
-    const [menu, setMenu] = useState(MenuItems.HOME);
-
 
     return (
         <section className={styles.container}>
@@ -31,76 +76,50 @@ function Sidebar() {
                 {/* 메뉴 카테고리 */}
                 <nav className={styles.categoryBox}>
                     <ol>
-                        {/* 홈 메뉴 */}
-                        <Link className={menu === MenuItems.HOME ? styles.active : ''} href={'/'} onClick={() => setMenu(MenuItems.HOME)}>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <p>홈</p>
-                            </li>
-                        </Link>
-                        {/* 자료구조 메뉴 */}
-                        <Link className={menu === MenuItems.DATA_STRUCTURE ? styles.active : ''} href={'/'} onClick={() => setMenu(MenuItems.DATA_STRUCTURE)}>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <p>자료구조</p>
-                            </li>
-                        </Link>
-                        {/* 알고리즘 메뉴 */}
-                        <Link className={menu === MenuItems.ALGORITHM ? styles.active : ''} href={'/'} onClick={() => setMenu(MenuItems.ALGORITHM)}>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <p>알고리즘</p>
-                            </li>
-                        </Link>
-                        {/* 자바스크립트 메뉴 */}
-                        <Link className={menu === MenuItems.JAVASCRIPT ? styles.active : ''} href={'/'} onClick={() => setMenu(MenuItems.JAVASCRIPT)}>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <p>자바스크립트</p>
-                            </li>
-                        </Link>
-                        {/* 타입스크립트 메뉴 */}
-                        <Link className={menu === MenuItems.TYPESCRIPT ? styles.active : ''} href={'/'} onClick={() => setMenu(MenuItems.TYPESCRIPT)}>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <p>타입스크립트</p>
-                            </li>
-                        </Link>
-                        {/* 리액트 메뉴 */}
-                        <Link className={menu === MenuItems.REACT ? styles.active : ''} href={'/'} onClick={() => setMenu(MenuItems.REACT)}>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <p>리액트</p>
-                            </li>
-                        </Link>
-                        {/* Next JS 메뉴 */}
-                        <Link className={menu === MenuItems.NEXTJS ? styles.active : ''} href={'/'} onClick={() => setMenu(MenuItems.NEXTJS)}>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <p>Next JS</p>
-                            </li>
-                        </Link>
+                        {/* home */}
+                        <div>
+                            <Link className={menu === homeMenu ? styles.active : ''} href={`#`} onClick={() => setMenu(homeMenu)}>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg>
+                                    <p>홈</p>
+                                </li>
+                            </Link>
+                        </div>
+                        {/* menu list */}
+                        {
+                            menuList.map((item, index) => {
+
+                                const [category, posts] = item;
+
+                                return (
+                                    <div key={index}>
+                                        <Link className={menu === category ? styles.active : ''} href={`#`} onClick={() => { setMenu(category); toggleCategory(category); }}>
+                                            <li>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                                </svg>
+                                                <p>{category}</p>
+                                            </li>
+                                        </Link>
+                                        {
+                                            openCategory[category]
+                                            &&
+                                            posts.map(post => {
+                                                return (
+                                                    <Link key={post.blog_index} className={styles.blogPost} href={'#'}>
+                                                        <div >{post.blog_title}</div>
+                                                    </Link>
+                                                );
+                                            })
+                                        }
+                                    </div>
+                                );
+                            })
+                        }
                     </ol>
                 </nav>
                 {/* contact box */}
