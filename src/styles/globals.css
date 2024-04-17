@@ -114,3 +114,25 @@ body {
   overflow-y: auto;
   min-width: 320px;
 }
+
+
+
+
+
+/* main page main project */
+/* custom slide navigation */
+.mainProjectCardBox .swiper-pagination {
+  margin-bottom: 10px;
+}
+
+.mainProjectCardBox .swiper-pagination-bullet{
+  width: 12px;
+  height: 12px;
+  background-color: rgb(255 255 255 / 90%);
+}
+
+.mainProjectCardBox .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  transition-property: all;
+  transition-duration: .5s;
+  transition-timing-function: ease-in-out;
+}
