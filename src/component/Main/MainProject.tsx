@@ -7,10 +7,12 @@ import styles from '@/styles/Main/MainProject.module.css';
 
 // component
 import MainSeoulUEduProject from './MainSeoulUEduProject';
+import MainPortfolioProject from './MainPortfolioProject';
 
 function MainProject() {
 
     const [renderSeoulUEduProject, setRenderSeoulUeduProject] = useState(false);
+    const [renderPortfolioProject, setRenderPortfolioProject] = useState(false);
 
     const onOpenSeoulUEduProject = () => {
         setRenderSeoulUeduProject(true);
@@ -20,6 +22,18 @@ function MainProject() {
         setRenderSeoulUeduProject(false);
     }
 
+    const onOpenPortfolioProject = () => {
+        setRenderPortfolioProject(true);
+    }
+
+    const onClosePortfolioProject = () => {
+        setRenderPortfolioProject(false);
+    }
+
+    const onOpenTheRebelProject = () => {
+        alert('인터네셔널 커뮤니티 The Rebel은 아직 개발 착수전입니다.');
+    }
+ 
     return (
         <>
             <section className={styles.container}>
@@ -52,7 +66,7 @@ function MainProject() {
                                 </svg>
                             </div>
                         </div>
-                        <div className={styles.cardview}>
+                        <div className={styles.cardview} onClick={onOpenPortfolioProject}>
                             <div className={styles.imageBox}>
                                 <Image src={portfolioProjectCoverImage} width={400} height={295} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
                             </div>
@@ -79,7 +93,7 @@ function MainProject() {
                                 </svg>
                             </div>
                         </div>
-                        <div className={styles.cardview}>
+                        <div className={styles.cardview} onClick={onOpenTheRebelProject}>
                             <div className={styles.imageBox}>
                                 <Image src={rebelProjectCoverImage} width={400} height={295} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
                             </div>
@@ -113,6 +127,11 @@ function MainProject() {
                 renderSeoulUEduProject
                 &&
                 <MainSeoulUEduProject onCloseSeoulUEduProject={onCloseSeoulUEduProject} />
+            }
+            {
+                renderPortfolioProject
+                &&
+                <MainPortfolioProject onClosePortfolioProject={onClosePortfolioProject}/>
             }
         </>
     )
