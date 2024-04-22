@@ -45,6 +45,7 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
     // state
     const [menu, setMenu] = useState(homeMenu);
     const [openCategory, setOpenCategory] = useState<Record<string, boolean>>({});
+    const [activePost, setActivePost] = useState<number | null>(null);
 
     // blog category data
     const categoryData = useMemo(() => {
@@ -61,11 +62,24 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
     // blog menu list
     const menuList = Object.entries(categoryData);
 
+    // toggle category
     const toggleCategory = (category: string) => {
+        if(openCategory[category]) {
+            setMenu('');
+        } else {
+            setActivePost(null);
+        }
+
         setOpenCategory(prevState => ({
             ...prevState,
             [category]: !prevState[category]
         }));
+    };
+
+    // handle post click
+    const handlePostClick = (postIndex: number) => {
+        setMenu('');
+        setActivePost(postIndex);
     };
 
     const onSidebarMenuClose = () => {
@@ -132,7 +146,7 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
                                             &&
                                             posts.map(post => {
                                                 return (
-                                                    <Link key={post.blog_index} className={styles.blogPost} href={'#'}>
+                                                    <Link key={post.blog_index} className={activePost === post.blog_index ? styles.blogPostActive : styles.blogPost} href={'#'} onClick={() => handlePostClick(post.blog_index)}>
                                                         <div >{post.blog_title}</div>
                                                     </Link>
                                                 );
