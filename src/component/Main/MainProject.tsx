@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import seoulUeduProjectCoverImage from '../../../public/image/main/mainProject/240404_seoulUEdu_projectCover_image.png';
 import portfolioProjectCoverImage from '../../../public/image/main/mainProject/240404_portfolio_projectCover_image.png';
@@ -8,11 +8,19 @@ import styles from '@/styles/Main/MainProject.module.css';
 // component
 import MainSeoulUEduProject from './MainSeoulUEduProject';
 import MainPortfolioProject from './MainPortfolioProject';
+import LineNotification from '../Notification/LineNotification';
 
 function MainProject() {
 
+    // render project
     const [renderSeoulUEduProject, setRenderSeoulUeduProject] = useState(false);
     const [renderPortfolioProject, setRenderPortfolioProject] = useState(false);
+
+    // render line notification
+    const [renderLineNotification, setRenderLineNotification] = useState(false);
+
+    // line notification
+    const [lineNotificationText, setLineNotifcationText] = useState('');
 
     const onOpenSeoulUEduProject = () => {
         setRenderSeoulUeduProject(true);
@@ -31,9 +39,21 @@ function MainProject() {
     }
 
     const onOpenTheRebelProject = () => {
-        alert('인터네셔널 커뮤니티 The Rebel은 아직 개발 착수전입니다.');
+        // render line notifcation
+        setLineNotifcationText('인터네셔널 커뮤니티 The Rebel은 아직 개발 착수전입니다. 조금만 기다려주세요.');
+        setRenderLineNotification(true);
     }
- 
+
+    // hide line notification
+    useEffect(() => {
+        if (renderLineNotification === true) {
+            const timeOut = setTimeout(() => setRenderLineNotification(false), 1500);
+            return () => {
+                clearTimeout(timeOut);
+            }
+        }
+    }, [renderLineNotification]);
+
     return (
         <>
             <section className={styles.container}>
@@ -131,7 +151,12 @@ function MainProject() {
             {
                 renderPortfolioProject
                 &&
-                <MainPortfolioProject onClosePortfolioProject={onClosePortfolioProject}/>
+                <MainPortfolioProject onClosePortfolioProject={onClosePortfolioProject} />
+            }
+            {
+                renderLineNotification
+                &&
+                <LineNotification lineNotificationText={lineNotificationText}/>
             }
         </>
     )

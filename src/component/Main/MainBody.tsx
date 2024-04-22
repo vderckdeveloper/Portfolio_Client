@@ -7,6 +7,7 @@ import LeftDescription from "@/sharedComponent/Description/LeftDescription";
 import MainCapability from "./MainCapability";
 import CenterDescription from "../../sharedComponent/Description/CenterDescription";
 import MainProject from "./MainProject";
+import Footer from "../Footer/Footer";
 
 import styles from '@/styles/Main/MainBody.module.css';
 
@@ -68,6 +69,7 @@ function MainBody(props: MainBodyProps) {
             <MainCapability />
             <CenterDescription content={CenterDescriptionContent}/>
             <MainProject />
+            <Footer />
         </section>
     );
 }
