@@ -37,13 +37,17 @@
 
 .wrapper::-webkit-scrollbar {
     width: 5px;
-    border-radius: 15px;
-    background-color: rgb(70, 70, 70,0.9);
 }
-  
+
 .wrapper::-webkit-scrollbar-thumb {
-    border-radius: 15px;
-    background-color: rgb(136, 136, 136);
+    background: #000;
+    border-radius: 0;
+    border-radius: 10px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+    width: 5px;
+    background: #17191c;
 }
 
 /* top section */
