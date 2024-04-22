@@ -132,6 +132,16 @@
     transition: all 0.5s;
 }
 
+.categoryBox > ol > div > a.blogPostActive {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    font-weight: 800;
+    color: #ff014f;
+    border-radius: 10px;
+    box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;;
+}
+
 .categoryBox > ol > div > a.blogPost > div {
     margin-left: 40px;
     font-size: 18px;
@@ -140,6 +150,12 @@
 
 .categoryBox > ol > div > a.blogPost:hover > div {
     color: #e7e7e7;
+}
+
+.categoryBox > ol > div > a.blogPostActive > div {
+    margin-left: 40px;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 /* contact box */
