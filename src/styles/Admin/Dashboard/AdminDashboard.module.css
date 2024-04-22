@@ -1,0 +1,143 @@
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+    background-size : contain;
+    background-image: url(../../../../public/image/admin/240422_admin_background_ver1.0.webp);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 80%;
+
+}
+
+/* main */
+.main {
+    width: calc(100% - 350px);
+    max-width: 1440px;
+    margin: 20px 0;
+}
+
+/* side bar */
+.sidebar {
+    position: sticky;
+    top: 40px;
+    margin-right: 50px;
+    padding: 5px 0;
+    width: 300px;
+    min-height: 800px;
+    min-width: 300px;
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: #242424;
+    color: #999999;
+}
+
+.sidebar > li  {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 0 20px 80px;
+    width: 100%;
+    list-style: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.sidebar > li > svg {
+    margin-right: 20px;
+    transition: 0.3s ease-in-out;
+}
+
+.sidebar > li.clicked {
+    border-radius: 5px;
+    background-color: #747474;
+    color: white;
+}
+
+.sidebar > li.clicked > svg {
+    fill: white;
+}
+
+.sidebar > li.clicked > svg > path {
+    fill: white;
+}
+
+/* sub menu */
+.subMenu {
+    width: 100%;
+}
+
+.subMenu > div  {
+    position: relative;
+    padding: 20px 0 20px 130px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.subMenu > div.clicked {
+    border-radius: 5px;
+    background-color: #747474;
+    color: white;
+}
+
+.subMenu > div > p {
+    position: absolute;
+    top: 12px;
+    left: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 50%;
+    background-color: rgba(0, 187, 255, 0.9);
+    color: white;
+}
+
+@media all and (max-width:1024px) {
+    .main {
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 30px;
+        margin-right: 0;
+        padding: 0;
+        width: 100%;
+        min-height: fit-content;
+    }
+}
+
+@media all and (max-width:540px) {
+    .wrapper {
+        width: 90%;
+    }
+}
+
+@media all and (max-width:378px) {
+    .sidebar {
+        min-width: fit-content;
+    }
+}

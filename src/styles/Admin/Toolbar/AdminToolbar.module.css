@@ -1,0 +1,86 @@
+/* Website Toolbar */
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0px;
+    background-color: black;
+  }
+  
+  .toolbar > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+  }
+
+  .toolbar > div > .toolbar_Logo > a {
+    display: block;
+    height: 57px;
+  }
+  
+  .toolbar > div > .toolbar_Logo > a > img {
+    width: 200px;
+  }
+  
+  .toolbar > div > .toolbar_account {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .toolbar > div > .toolbar_account > a {
+    text-decoration: none;
+  }
+  
+    /* login text */
+  .toolbar > div > .toolbar_account > a > div {
+    margin: 0px 10px;
+    color: white;
+    font-family: 'AppleSDGothicNeo';
+  }
+  
+    /* logout text */
+  .toolbar > div > .toolbar_account > div {
+    margin: 0px 10px;
+    color: white;
+    font-family: 'AppleSDGothicNeo';
+  }
+  
+  .toolbar > div > .toolbar_account > div:hover {
+    cursor: pointer;
+  }
+  
+  .toolbar > div > .toolbar_mobile {
+    /* hide mobile menu on PC */
+    display: none;
+  }
+  
+  .toolbar > div > .toolbar_mobile > svg:first-child {
+    cursor: pointer;
+  }
+  
+  @media all and (max-width:1024px) {
+    .toolbar > div > .toolbar_account {
+      display: none;
+    }
+  
+    .toolbar > div > .toolbar_mobile {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    .toolbar > div {
+      width: 85%;
+    }
+  }
+
+  @media all and (max-width:480px) {
+    .toolbar > div {
+      width: 90%;
+    }
+  }
