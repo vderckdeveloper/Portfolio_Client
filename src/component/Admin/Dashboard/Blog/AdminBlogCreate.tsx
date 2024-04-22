@@ -1,15 +1,57 @@
 import { useState, useEffect, useRef } from 'react';
-import { Editor, EditorState, RichUtils, Modifier, SelectionState } from 'draft-js';
+import { Editor, EditorState, RichUtils, CompositeDecorator, ContentBlock, ContentState } from 'draft-js';
 
 import styles from '@/styles/Admin/Dashboard/Blog/AdminBlogCreate.module.css';
+
+/**
+ * Finds link entities within a content block and applies a callback to each.
+ * @param contentBlock - The block of content to be examined.
+ * @param callback - The function to call with start and end indices of each link entity found.
+ * @param contentState - The state of the content which may contain entities.
+ */
+function findLinkEntities(contentBlock: ContentBlock, callback: (start: number, end: number) => void, contentState: ContentState) {
+    contentBlock.findEntityRanges(
+        (character) => {
+            const entityKey = character.getEntity();
+            return (
+                entityKey !== null &&
+                contentState.getEntity(entityKey).getType() === 'LINK'
+            );
+        },
+        callback
+    );
+}
+
+interface LinkProps {
+    contentState: ContentState;
+    entityKey: string;
+    children: React.ReactNode;
+}
+
+const Link: React.FC<LinkProps> = (props) => {
+    const { url } = props.contentState.getEntity(props.entityKey).getData();
+    return (
+        <a href={url}>
+            {props.children}
+        </a>
+    );
+};
+
 
 function AdminBlogCreate() {
 
     // read only
     const [readOnly, setReadOnly] = useState(false);
 
+    const decorator = new CompositeDecorator([
+        {
+            strategy: findLinkEntities,
+            component: Link,
+        }
+    ]);
+
     const [editorState, setEditorState] = useState(
-        EditorState.createEmpty()
+        EditorState.createEmpty(decorator)
     );
 
     const editor = useRef<Editor>(null);
@@ -40,6 +82,37 @@ function AdminBlogCreate() {
         setEditorState(RichUtils.toggleBlockType(editorState, blockType));
     }
 
+    // prompt for link
+    const promptForLink = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const selection = editorState.getSelection();
+        if (!selection.isCollapsed()) {
+            const url = window.prompt('Enter the URL');
+            if (url) {
+                const contentState = editorState.getCurrentContent();
+                const contentStateWithEntity = contentState.createEntity('LINK', 'MUTABLE', { url });
+                const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+                const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
+                const newEditorStateWithLink = RichUtils.toggleLink(
+                    newEditorState,
+                    newEditorState.getSelection(),
+                    entityKey
+                );
+                setEditorState(newEditorStateWithLink);
+                focusEditor();
+            }
+        }
+    }
+
+     // Define removeLink here
+     const removeLink = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const selection = editorState.getSelection();
+        if (!selection.isCollapsed()) {
+            setEditorState(RichUtils.toggleLink(editorState, selection, null));
+        }
+    };
+
     // focus editor
     useEffect(() => {
         if (editor.current) {
@@ -66,6 +139,8 @@ function AdminBlogCreate() {
                 <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('ordered-list-item') }}>ordered-list-item</button>
                 <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('blockquote') }}>Blockquote</button>
                 <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('code-block') }}>code block</button>
+                <button onMouseDown={promptForLink}>Add Link</button>
+                <button onMouseDown={removeLink}>Remove Link</button>
                 <button onMouseDown={() => setReadOnly(prevState => !prevState)}>Save</button>
             </div>
             <Editor
