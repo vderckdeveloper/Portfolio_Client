@@ -10,3 +10,8 @@
 .tool {
     margin-bottom: 20px;
 }
+
+/* editor width */
+.container > div:nth-child(2) {
+    width: 100%;
+}
