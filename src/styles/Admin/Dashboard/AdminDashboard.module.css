@@ -3,8 +3,9 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding-bottom: 50px;
+    height: calc(100vh - 220px);
     background-size : contain;
     background-image: url(../../../../public/image/admin/240422_admin_background_ver1.0.webp);
 }
@@ -106,10 +107,20 @@
     color: white;
 }
 
+@media all and (max-height: 1080px) {
+    .container {
+        height: auto;
+    }
+}
+
 @media all and (max-width:1024px) {
     .main {
         width: 100%;
         margin: 0 0 20px 0;
+    }
+
+    .container {
+        height: auto;
     }
 
     .wrapper {
@@ -126,7 +137,7 @@
         margin-right: 0;
         padding: 0;
         width: 100%;
-        min-height: fit-content;
+        min-height: 600px;
     }
 }
 
