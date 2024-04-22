@@ -3,6 +3,9 @@ import { useState } from "react";
 // style
 import styles from '@/styles/Admin/Dashboard/AdminDashboard.module.css';
 
+// component
+import AdminBlogCreate from "./Blog/AdminBlogCreate";
+
 interface BlogData {
     blog_index: number;
     blog_uniqueNum: number;
@@ -29,9 +32,9 @@ function AdminDashboard(props: AdminDashboardProps) {
 
     const MenuItems = {
         DASHBOARD: 'DASHBOARD',
-        LECTURE_ADD: 'LECTURE_ADD',
-        LECTURE_SETTING: 'LECTURE_SETTING',
-        LECTURE_OUTLINE_SETTING: 'LECTURE_OUTLINE_SETTING',
+        BLOG_CREATE: 'BLOG_CREATE',
+        BLOG_UPDATE: 'BLOG_UPDATE',
+        BLOG_DELETE: 'BLOG_DELETE',
     };
 
     const [menu, setMenu] = useState(MenuItems.DASHBOARD);
@@ -69,16 +72,16 @@ function AdminDashboard(props: AdminDashboardProps) {
                         &&
                         <section className={styles.subMenu}>
                             <div
-                                className={menu === MenuItems.LECTURE_ADD ? styles.clicked : ''}
-                                onClick={() => setMenu(MenuItems.LECTURE_ADD)}>블로그 작성
+                                className={menu === MenuItems.BLOG_CREATE ? styles.clicked : ''}
+                                onClick={() => setMenu(MenuItems.BLOG_CREATE)}>블로그 작성
                             </div>
                             <div
-                                className={menu === MenuItems.LECTURE_SETTING ? styles.clicked : ''}
-                                onClick={() => setMenu(MenuItems.LECTURE_SETTING)}>블로그 수정
+                                className={menu === MenuItems.BLOG_UPDATE ? styles.clicked : ''}
+                                onClick={() => setMenu(MenuItems.BLOG_UPDATE)}>블로그 수정
                             </div>
                             <div
-                                className={menu === MenuItems.LECTURE_OUTLINE_SETTING ? styles.clicked : ''}
-                                onClick={() => setMenu(MenuItems.LECTURE_OUTLINE_SETTING)}>블로그 삭제
+                                className={menu === MenuItems.BLOG_DELETE ? styles.clicked : ''}
+                                onClick={() => setMenu(MenuItems.BLOG_DELETE)}>블로그 삭제
                             </div>
                         </section>
                     }
@@ -89,6 +92,12 @@ function AdminDashboard(props: AdminDashboardProps) {
                         menu === MenuItems.DASHBOARD
                         &&
                         <p>대쉬보드 홈 화면</p>
+                    }
+                    {/* blog add section */}
+                    {
+                        menu === MenuItems.BLOG_CREATE
+                        &&
+                        <AdminBlogCreate />
                     }
                 </section>
             </div>
