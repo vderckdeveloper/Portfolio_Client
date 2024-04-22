@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import { Editor, EditorState, RichUtils, Modifier, SelectionState } from 'draft-js';
 
 import styles from '@/styles/Admin/Dashboard/Blog/AdminBlogCreate.module.css';
 
 function AdminBlogCreate() {
+
+    // read only
+    const [readOnly, setReadOnly] = useState(false);
 
     const [editorState, setEditorState] = useState(
         EditorState.createEmpty()
@@ -37,33 +40,6 @@ function AdminBlogCreate() {
         setEditorState(RichUtils.toggleBlockType(editorState, blockType));
     }
 
-    // prompt for link
-    const promptForLink = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        const currentSelection = editorState.getSelection();
-        if (!currentSelection.isCollapsed()) {
-            const url = window.prompt('Enter the URL');
-            if (url) {
-                const contentState = editorState.getCurrentContent();
-                const contentStateWithEntity = contentState.createEntity(
-                    'LINK',
-                    'MUTABLE',
-                    { url }
-                );
-                const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-                const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
-                const withLink = RichUtils.toggleLink(
-                    newEditorState,
-                    newEditorState.getSelection(),
-                    entityKey
-                );
-                setEditorState(withLink);
-            }
-        } else {
-            alert('Please select text where you want to apply the link.');
-        }
-    };
-
     // focus editor
     useEffect(() => {
         if (editor.current) {
@@ -90,14 +66,14 @@ function AdminBlogCreate() {
                 <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('ordered-list-item') }}>ordered-list-item</button>
                 <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('blockquote') }}>Blockquote</button>
                 <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('code-block') }}>code block</button>
-                <button onMouseDown={promptForLink}>Link</button>
-
+                <button onMouseDown={() => setReadOnly(prevState => !prevState)}>Save</button>
             </div>
             <Editor
                 ref={editor}
                 editorState={editorState}
                 onChange={setEditorState}
                 handleKeyCommand={handleKeyCommand}
+                readOnly={readOnly}
             />
         </div>
     );
