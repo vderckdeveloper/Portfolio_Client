@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState } from 'draft-js';
 
 import styles from '@/styles/Admin/Dashboard/Blog/AdminBlogCreate.module.css';
@@ -69,7 +68,7 @@ const ImageComponent: React.FC<ImageProps> = (props) => {
     return (
         <div style={{ overflow: 'hidden' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} style={{ display: 'block', borderRadius: '8px' }} width='100%' height='100%' alt="블로그 이미지" />;
+            <img src={src} style={{ display: 'block', borderRadius: '8px' }} width='100%' height='100%' alt="블로그 이미지" />
         </div>
     );
 
@@ -230,6 +229,7 @@ function AdminBlogCreate() {
                     id="fileInput"
                     style={{ display: 'none' }}
                     onChange={uploadImage}
+                    ref={fileInputRef}
                 />
                 <button onMouseDown={handleAddImageClick}>
                     Add Image
