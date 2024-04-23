@@ -73,12 +73,14 @@ function AdminBlogCreate() {
     }
 
     // Toggle inline styles
-    const onToggleInlineStyle = (inlineStyle: string) => {
+    const onToggleInlineStyle = (e: React.MouseEvent, inlineStyle: string) => {
+        e.preventDefault();
         setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
     }
 
     // toggle block types
-    const onToggleBlockType = (blockType: string) => {
+    const onToggleBlockType = (e: React.MouseEvent, blockType: string) => {
+        e.preventDefault();
         setEditorState(RichUtils.toggleBlockType(editorState, blockType));
     }
 
@@ -123,22 +125,22 @@ function AdminBlogCreate() {
     return (
         <div className={styles.container} onClick={focusEditor}>
             <div className={styles.tool}>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleInlineStyle('BOLD') }}>Bold</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleInlineStyle('ITALIC') }}>Italic</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleInlineStyle('UNDERLINE') }}>Underline</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleInlineStyle('STRIKETHROUGH') }}>STRIKETHROUGH</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleInlineStyle('CODE') }}>CODE</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('header-one') }}>H1</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('header-two') }}>H2</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('header-three') }}>H3</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('header-four') }}>H4</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('header-five') }}>H5</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('header-six') }}>H6</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('unstyled') }}>Paragraph</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('unordered-list-item') }}>unordered-list-item</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('ordered-list-item') }}>ordered-list-item</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('blockquote') }}>Blockquote</button>
-                <button onMouseDown={(e) => { e.preventDefault(); onToggleBlockType('code-block') }}>code block</button>
+                <button onMouseDown={(e) => {onToggleInlineStyle(e,'BOLD') }}>Bold</button>
+                <button onMouseDown={(e) => {onToggleInlineStyle(e,'ITALIC') }}>Italic</button>
+                <button onMouseDown={(e) => {onToggleInlineStyle(e,'UNDERLINE') }}>Underline</button>
+                <button onMouseDown={(e) => {onToggleInlineStyle(e,'STRIKETHROUGH') }}>STRIKETHROUGH</button>
+                <button onMouseDown={(e) => {onToggleInlineStyle(e,'CODE') }}>CODE</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'header-one') }}>H1</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'header-two') }}>H2</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'header-three') }}>H3</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'header-four') }}>H4</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'header-five') }}>H5</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'header-six') }}>H6</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'unstyled') }}>Paragraph</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e, 'unordered-list-item') }}>unordered-list-item</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'ordered-list-item') }}>ordered-list-item</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'blockquote') }}>Blockquote</button>
+                <button onMouseDown={(e) => {onToggleBlockType(e,'code-block') }}>code block</button>
                 <button onMouseDown={promptForLink}>Add Link</button>
                 <button onMouseDown={removeLink}>Remove Link</button>
                 <button onMouseDown={() => setReadOnly(prevState => !prevState)}>Save</button>
