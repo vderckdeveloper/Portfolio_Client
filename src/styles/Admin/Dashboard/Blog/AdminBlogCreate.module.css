@@ -26,6 +26,16 @@
 }
 
 .tool {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
 }
 
+.tool > button {
+    width: 30px;
+    height: 30px;
+    font-weight: 600;
+    font-size: 12px;
+}
