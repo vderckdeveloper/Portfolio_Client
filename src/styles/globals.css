@@ -136,3 +136,11 @@ body {
   transition-duration: .5s;
   transition-timing-function: ease-in-out;
 }
+
+/* blog iframe */
+@media (max-width: 716px) {
+  .youtubeWrapper > iframe {
+    width: 100%; 
+    height: auto; 
+  }
+}
