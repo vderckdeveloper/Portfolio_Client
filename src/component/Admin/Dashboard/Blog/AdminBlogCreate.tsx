@@ -197,7 +197,7 @@ function AdminBlogCreate() {
         }
     }
 
-    // prommpt for iframe
+    // prompt for iframe
     const promptForIFrame = (e: React.MouseEvent) => {
         e.preventDefault();
         const src = window.prompt("Enter the iframe URL");
