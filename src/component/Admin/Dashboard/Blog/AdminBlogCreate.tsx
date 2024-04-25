@@ -104,7 +104,7 @@ const IFrameComponent: React.FC<IFrameProps> = (props) => {
     const { src } = props.contentState.getEntity(props.entityKey).getData();
 
     return (
-        <div style={{ overflow: 'hidden' }}>
+        <div className='youtubeWrapper' style={{ overflow: 'hidden' }}>
             <iframe
                 src={src}
                 title="YouTubeVideoPlayer"
@@ -355,6 +355,7 @@ function AdminBlogCreate() {
                     </svg>
                 </button>
             </div>
+            <div className={styles.editorWrapper}>
             <Editor
                 ref={editor}
                 editorState={editorState}
@@ -362,6 +363,7 @@ function AdminBlogCreate() {
                 handleKeyCommand={handleKeyCommand}
                 readOnly={readOnly}
             />
+            </div>
         </div>
     );
 }
