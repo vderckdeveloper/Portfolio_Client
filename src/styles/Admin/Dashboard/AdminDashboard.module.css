@@ -115,8 +115,8 @@
 
 @media all and (max-width:1024px) {
     .main {
+        margin: 40px 0 20px 0;
         width: 100%;
-        margin: 0 0 20px 0;
     }
 
     .container {
