@@ -9,6 +9,8 @@
     max-height: 800px;
     overflow-x: hidden;
     overflow-y: auto;
+    border: 8px 8px 0 0;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .container::-webkit-scrollbar {
@@ -28,17 +30,29 @@
 
 .tool {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 20px;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px 8px 0 0;
+    background-color: rgb(249, 250, 250);
 }
 
 .tool > button {
+    flex-basis: 30px;
     width: 30px;
     height: 30px;
     font-weight: 600;
     font-size: 12px;
+    border: none;
+    background-color: transparent;
+    transition: 0.4s;
+}
+
+.tool > button:hover {
+    border-radius: 8px;
+    background-color: rgb(229, 231, 235);
+    cursor: pointer;
 }
 
 /* editor */
@@ -46,4 +60,3 @@
     width: 100%;
     height: 750px;
 }
-
