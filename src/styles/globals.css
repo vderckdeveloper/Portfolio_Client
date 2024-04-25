@@ -137,7 +137,29 @@ body {
   transition-timing-function: ease-in-out;
 }
 
+/* draft js writing */
 /* blog iframe */
+.DraftEditor-root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.DraftEditor-root > .public-DraftEditorPlaceholder-root {
+    position: absolute;
+    margin: 0 -15px -15px 0;
+    padding: 15px;
+    color: #c0c1c3;
+}
+
+.DraftEditor-root > .DraftEditor-editorContainer {
+    position: relative;
+    z-index: 1;
+    margin: 0 -15px -15px 0;
+    padding: 15px;
+    border-left: .1px solid transparent;
+}
+
 @media all and (max-width: 1150px) {
   .youtubeWrapper > iframe {
     width: 100%; 
@@ -151,3 +173,4 @@ body {
     height: 300px; 
   }
 }
+
