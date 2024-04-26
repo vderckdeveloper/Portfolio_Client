@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState } from 'draft-js';
+import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState, convertToRaw } from 'draft-js';
 
 import styles from '@/styles/Admin/Dashboard/Blog/AdminBlogCreate.module.css';
 
@@ -258,6 +258,29 @@ function AdminBlogCreate() {
         }
     };
 
+    // send button
+    const onSend = async () => {
+        const content = convertToRaw(editorState.getCurrentContent());
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/postBlog`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content: content }),
+            cache: 'no-store'
+        });
+
+        if (!response.ok) {
+            console.error('Failed to save content');
+            alert('글 작성에 실패하였습니다.');
+        }
+
+        const data = await response.json();
+
+        console.log(data);
+    }
+
 
     // focus editor
     useEffect(() => {
@@ -370,7 +393,7 @@ function AdminBlogCreate() {
                 </div>
             </div>
             <div className={styles.buttonContainer}>
-                <button>작성 하기</button>
+                <button onClick={onSend}>작성 하기</button>
             </div>
         </>
     );
