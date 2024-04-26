@@ -300,7 +300,7 @@
 @keyframes fadeInDown {
     0% {
         opacity: 0;
-        transform: translate3d(-50%, -150%, 0);
+        transform: translate3d(-50%, -60%, 0);
     }
     to {
         opacity: 1;
