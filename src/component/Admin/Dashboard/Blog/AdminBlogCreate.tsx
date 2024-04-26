@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState, convertToRaw } from 'draft-js';
+import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState, DraftHandleValue, convertToRaw } from 'draft-js';
 
 import styles from '@/styles/Admin/Dashboard/Blog/AdminBlogCreate.module.css';
 
@@ -230,6 +230,25 @@ function AdminBlogCreate() {
         fileInputRef.current.click();
     };
 
+    // handle pasted image file
+    const handlePastedImageFiles = (file: Blob): DraftHandleValue => {
+        const formData = new FormData()
+        formData.append('file', file)
+      
+        fetch(`${process.env.NEXT_PUBLIC_URL}/postBlogImage`, { method: 'POST', body: formData })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data) {
+              console.log('success');
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      
+        return 'handled'
+    }
+
     // image upload
     const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -241,6 +260,9 @@ function AdminBlogCreate() {
             reader.onload = (e: ProgressEvent<FileReader>) => {
 
                 if (!e.target) return;
+
+                // fix the code below
+                handlePastedImageFiles(file);
 
                 const contentState = editorState.getCurrentContent();
                 const contentStateWithEntity = contentState.createEntity(
