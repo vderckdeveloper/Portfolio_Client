@@ -143,6 +143,9 @@ function AdminBlogCreate() {
         EditorState.createEmpty(decorator)
     );
 
+    // image files
+    const [files, setFiles] = useState<File[]>([]);
+
     // ref
     const editor = useRef<Editor>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -234,18 +237,18 @@ function AdminBlogCreate() {
     const handlePastedImageFiles = (file: Blob): DraftHandleValue => {
         const formData = new FormData()
         formData.append('file', file)
-      
+
         fetch(`${process.env.NEXT_PUBLIC_URL}/postBlogImage`, { method: 'POST', body: formData })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data) {
-              console.log('success');
-            }
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      
+            .then((res) => res.json())
+            .then((data) => {
+                if (data) {
+                    console.log('success');
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
         return 'handled'
     }
 
@@ -255,7 +258,7 @@ function AdminBlogCreate() {
         if (!e.target.files || e.target.files.length === 0) return;
 
         const file = e.target.files[0];
-        if (file.type.match('image.*')) {
+        if (file.type.match(/^image\/(png|jpg|jpeg|webp)$/)) {
             const reader = new FileReader();
             reader.onload = (e: ProgressEvent<FileReader>) => {
 
@@ -263,6 +266,7 @@ function AdminBlogCreate() {
 
                 // fix the code below
                 handlePastedImageFiles(file);
+                setFiles(prevFiles => [...prevFiles, file]);
 
                 const contentState = editorState.getCurrentContent();
                 const contentStateWithEntity = contentState.createEntity(
@@ -280,27 +284,37 @@ function AdminBlogCreate() {
         }
     };
 
+
     // send button
     const onSend = async () => {
+    
         const content = convertToRaw(editorState.getCurrentContent());
-
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/postBlog`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ content: content }),
-            cache: 'no-store'
+        const formData = new FormData();
+        formData.append('content', JSON.stringify(content));
+        files.forEach((file) => {
+            formData.append('files', file);
         });
 
-        if (!response.ok) {
-            console.error('Failed to save content');
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/postBlog`, {
+                method: 'POST',
+                body: formData, 
+                cache: 'no-store'
+            });
+
+            console.log(response);
+
+            if (!response.ok) {
+                throw new Error('Failed to save content');
+            }
+
+            const data = await response.json();
+            console.log(data);
+            alert('글 작성이 성공적으로 완료되었습니다.');
+        } catch (error) {
+            console.error('Error:', error);
             alert('글 작성에 실패하였습니다.');
         }
-
-        const data = await response.json();
-
-        console.log(data);
     }
 
 
