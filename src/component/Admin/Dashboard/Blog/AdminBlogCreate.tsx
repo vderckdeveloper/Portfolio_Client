@@ -138,10 +138,11 @@ function AdminBlogCreate() {
     ]);
 
     // state
-    const [readOnly, setReadOnly] = useState(false);
+    const [title, setTitle] = useState('');
     const [editorState, setEditorState] = useState(
         EditorState.createEmpty(decorator)
     );
+    const [readOnly, setReadOnly] = useState(false);
 
     // image files
     const [files, setFiles] = useState<File[]>([]);
@@ -149,6 +150,11 @@ function AdminBlogCreate() {
     // ref
     const editor = useRef<Editor>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    // on title
+    const onTitle =(e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
+    }
 
     const focusEditor = () => {
         if (editor.current) {
@@ -233,24 +239,24 @@ function AdminBlogCreate() {
         fileInputRef.current.click();
     };
 
-    // handle pasted image file
-    const handlePastedImageFiles = (file: Blob): DraftHandleValue => {
-        const formData = new FormData()
-        formData.append('file', file)
+    // // handle pasted image file
+    // const handlePastedImageFiles = (file: Blob): DraftHandleValue => {
+    //     const formData = new FormData()
+    //     formData.append('file', file)
 
-        fetch(`${process.env.NEXT_PUBLIC_URL}/postBlogImage`, { method: 'POST', body: formData })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data) {
-                    console.log('success');
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    //     fetch(`${process.env.NEXT_PUBLIC_URL}/postBlogImage`, { method: 'POST', body: formData })
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             if (data) {
+    //                 console.log('success');
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
 
-        return 'handled'
-    }
+    //     return 'handled'
+    // }
 
     // image upload
     const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -265,7 +271,7 @@ function AdminBlogCreate() {
                 if (!e.target) return;
 
                 // fix the code below
-                handlePastedImageFiles(file);
+                // handlePastedImageFiles(file);
                 setFiles(prevFiles => [...prevFiles, file]);
 
                 const contentState = editorState.getCurrentContent();
@@ -290,6 +296,7 @@ function AdminBlogCreate() {
     
         const content = convertToRaw(editorState.getCurrentContent());
         const formData = new FormData();
+        formData.append('title', title);
         formData.append('content', JSON.stringify(content));
         files.forEach((file) => {
             formData.append('files', file);
@@ -327,6 +334,9 @@ function AdminBlogCreate() {
 
     return (
         <>
+            <div className={styles.titleContainer}>
+                <input maxLength={40} value={title} onChange={onTitle} placeholder='제목을 입력해주세요.'/>
+            </div>
             <div className={styles.container} onClick={focusEditor}>
                 <div className={styles.tool}>
                     <button onMouseDown={(e) => { onToggleInlineStyle(e, 'BOLD') }}>
