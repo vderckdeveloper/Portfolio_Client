@@ -152,9 +152,60 @@ function AdminBlogCreate() {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // on title
-    const onTitle =(e: React.ChangeEvent<HTMLInputElement>) => {
+    const onTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     }
+
+    //on edtior state
+    const onEditorState = (newEditorState: EditorState) => {
+        const currentContent = editorState.getCurrentContent();
+        const newContent = newEditorState.getCurrentContent();
+
+        if (currentContent !== newContent) {
+
+            const currentBlockMap = currentContent.getBlockMap();
+            const newBlockMap = newContent.getBlockMap();     
+
+            // Find blocks that were in the old state but not in the new state
+            const removedBlocks = currentBlockMap.filter(block => {
+                if (!block) return false; 
+                
+                return !newBlockMap.has(block.getKey());
+            });
+
+            // number of removed blocks are updated one time per each only.
+            console.log('Number of removed blocks:', removedBlocks.size);
+
+            // Check each removed block for image entities
+            removedBlocks.forEach(block => {
+                let imageFound = false;
+
+                if(!block) return;
+
+                block.findEntityRanges(
+                    (character) => {
+                        const entityKey = character.getEntity();
+                        if (entityKey) {
+                            const entityType = currentContent.getEntity(entityKey).getType();
+                            console.log('Entity type:', entityType); // Log the type of each entity
+                            return entityType === 'IMAGE';
+                        }
+                        return false;
+                    },
+                    (_start, _end) => {
+                        imageFound = true;
+                        console.log('Image deleted:', block.getText());
+                    }
+                );
+    
+                if (!imageFound) {
+                    console.log('No image found in this block:', block.getText());
+                }
+            });
+        }
+
+        setEditorState(newEditorState);
+    };
 
     const focusEditor = () => {
         if (editor.current) {
@@ -239,25 +290,6 @@ function AdminBlogCreate() {
         fileInputRef.current.click();
     };
 
-    // // handle pasted image file
-    // const handlePastedImageFiles = (file: Blob): DraftHandleValue => {
-    //     const formData = new FormData()
-    //     formData.append('file', file)
-
-    //     fetch(`${process.env.NEXT_PUBLIC_URL}/postBlogImage`, { method: 'POST', body: formData })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             if (data) {
-    //                 console.log('success');
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-
-    //     return 'handled'
-    // }
-
     // image upload
     const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -270,10 +302,6 @@ function AdminBlogCreate() {
 
                 if (!e.target) return;
 
-                // fix the code below
-                // handlePastedImageFiles(file);
-                setFiles(prevFiles => [...prevFiles, file]);
-
                 const contentState = editorState.getCurrentContent();
                 const contentStateWithEntity = contentState.createEntity(
                     'IMAGE',
@@ -283,6 +311,9 @@ function AdminBlogCreate() {
                 const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
                 const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
                 setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
+
+                // attach image file
+                setFiles(prevFiles => [...prevFiles, file]);
             };
             reader.readAsDataURL(file);
         } else {
@@ -293,7 +324,7 @@ function AdminBlogCreate() {
 
     // send button
     const onSend = async () => {
-    
+
         const content = convertToRaw(editorState.getCurrentContent());
         const formData = new FormData();
         formData.append('title', title);
@@ -305,7 +336,7 @@ function AdminBlogCreate() {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/postBlog`, {
                 method: 'POST',
-                body: formData, 
+                body: formData,
                 cache: 'no-store'
             });
 
@@ -335,7 +366,7 @@ function AdminBlogCreate() {
     return (
         <>
             <div className={styles.titleContainer}>
-                <input maxLength={40} value={title} onChange={onTitle} placeholder='제목을 입력해주세요.'/>
+                <input maxLength={40} value={title} onChange={onTitle} placeholder='제목을 입력해주세요.' />
             </div>
             <div className={styles.container} onClick={focusEditor}>
                 <div className={styles.tool}>
@@ -431,7 +462,7 @@ function AdminBlogCreate() {
                     <Editor
                         placeholder='내용을 입력해주세요.'
                         editorState={editorState}
-                        onChange={setEditorState}
+                        onChange={onEditorState}
                         ref={editor}
                         handleKeyCommand={handleKeyCommand}
                         readOnly={readOnly}
