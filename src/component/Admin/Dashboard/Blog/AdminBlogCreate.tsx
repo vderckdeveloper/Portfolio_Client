@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState, DraftHandleValue, convertToRaw } from 'draft-js';
+import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState, convertToRaw } from 'draft-js';
 
 import styles from '@/styles/Admin/Dashboard/Blog/AdminBlogCreate.module.css';
 
@@ -145,7 +145,7 @@ function AdminBlogCreate() {
     const [readOnly, setReadOnly] = useState(false);
 
     // image files
-    const [files, setFiles] = useState<File[]>([]);
+    const [files, setFiles] = useState<{ file: File; entityKey: string }[]>([]);
 
     // ref
     const editor = useRef<Editor>(null);
@@ -158,52 +158,6 @@ function AdminBlogCreate() {
 
     //on edtior state
     const onEditorState = (newEditorState: EditorState) => {
-        const currentContent = editorState.getCurrentContent();
-        const newContent = newEditorState.getCurrentContent();
-
-        if (currentContent !== newContent) {
-
-            const currentBlockMap = currentContent.getBlockMap();
-            const newBlockMap = newContent.getBlockMap();     
-
-            // Find blocks that were in the old state but not in the new state
-            const removedBlocks = currentBlockMap.filter(block => {
-                if (!block) return false; 
-                
-                return !newBlockMap.has(block.getKey());
-            });
-
-            // number of removed blocks are updated one time per each only.
-            console.log('Number of removed blocks:', removedBlocks.size);
-
-            // Check each removed block for image entities
-            removedBlocks.forEach(block => {
-                let imageFound = false;
-
-                if(!block) return;
-
-                block.findEntityRanges(
-                    (character) => {
-                        const entityKey = character.getEntity();
-                        if (entityKey) {
-                            const entityType = currentContent.getEntity(entityKey).getType();
-                            console.log('Entity type:', entityType); // Log the type of each entity
-                            return entityType === 'IMAGE';
-                        }
-                        return false;
-                    },
-                    (_start, _end) => {
-                        imageFound = true;
-                        console.log('Image deleted:', block.getText());
-                    }
-                );
-    
-                if (!imageFound) {
-                    console.log('No image found in this block:', block.getText());
-                }
-            });
-        }
-
         setEditorState(newEditorState);
     };
 
@@ -313,14 +267,13 @@ function AdminBlogCreate() {
                 setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
 
                 // attach image file
-                setFiles(prevFiles => [...prevFiles, file]);
+                setFiles(prevFiles => [...prevFiles, { file: file, entityKey: entityKey }]);
             };
             reader.readAsDataURL(file);
         } else {
             alert('추가 가능한 이미지 파일 형식이 아닙니다.');
         }
     };
-
 
     // send button
     const onSend = async () => {
@@ -329,8 +282,35 @@ function AdminBlogCreate() {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('content', JSON.stringify(content));
-        files.forEach((file) => {
-            formData.append('files', file);
+
+        const imageEntityKeyList: string[] = [];
+        // sort out unattached image files
+        const contentState = editorState.getCurrentContent();
+        const blocks = contentState.getBlocksAsArray();
+        blocks.forEach(block => {
+            block.findEntityRanges(
+                character => {
+                    const entity = character.getEntity();
+                    return entity !== null && entity !== undefined; 
+                },
+                (start, _end) => {
+                    const entityKey = block.getEntityAt(start);
+                    if (entityKey) {
+                        const entityType = contentState.getEntity(entityKey).getType();
+                        console.log(`Entity Key: ${entityKey}, Type: ${entityType}`);
+
+                        if (entityType === 'IMAGE') {
+                            imageEntityKeyList.push(entityKey);
+                        }
+                    }
+                }
+            );
+        });
+
+        files.forEach(({ file, entityKey }) => {
+            if (imageEntityKeyList.includes(entityKey)) {
+                formData.append('files', file);
+            }
         });
 
         try {
