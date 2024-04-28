@@ -28,6 +28,21 @@
     background: #17191c;
 }
 
+/* title */
+.titleContainer > input {
+    margin-bottom: 25px;
+    padding: 15px 10px;
+    width: 100%;
+    border: none;
+    font-family: 'AppleSDGothicNeo';
+    font-size: 18px;
+}
+  
+.titleContainer > input:focus {
+    outline: none;
+}
+
+/* tool */
 .tool {
     display: flex;
     flex-wrap: wrap;
