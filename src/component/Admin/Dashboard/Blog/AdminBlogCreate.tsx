@@ -317,7 +317,7 @@ function AdminBlogCreate() {
             };
             reader.readAsDataURL(file);
         } else {
-            console.error('File is not an image.');
+            alert('추가 가능한 이미지 파일 형식이 아닙니다.');
         }
     };
 
