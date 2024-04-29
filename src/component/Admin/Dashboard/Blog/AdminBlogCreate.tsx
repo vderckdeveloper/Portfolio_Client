@@ -140,6 +140,7 @@ function AdminBlogCreate() {
 
     // state
     const [title, setTitle] = useState('');
+    const [category, setCategory] = useState('');
     const [editorState, setEditorState] = useState(
         EditorState.createEmpty(decorator)
     );
@@ -155,6 +156,11 @@ function AdminBlogCreate() {
     // on title
     const onTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
+    }
+
+    // on category
+    const onCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCategory(e.target.value);
     }
 
     //on edtior state
@@ -256,13 +262,13 @@ function AdminBlogCreate() {
         // file size check
         if (file.size > 10 * 1024 * 1024) {
             alert('파일 크기는 10MB를 초과할 수 없습니다.');
-            return; 
+            return;
         }
 
         // file type check
         if (!file.type.match(/^image\/(png|jpg|jpeg|webp)$/)) {
             alert('추가 가능한 이미지 파일 형식이 아닙니다.');
-            return; 
+            return;
         }
 
         // add image files on the screen
@@ -294,6 +300,7 @@ function AdminBlogCreate() {
         const content = convertToRaw(editorState.getCurrentContent());
         const formData = new FormData();
         formData.append('title', title);
+        formData.append('category', category);
         formData.append('content', JSON.stringify(content));
 
         const imageEntityKeyList: string[] = [];
@@ -361,6 +368,9 @@ function AdminBlogCreate() {
         <>
             <div className={styles.titleContainer}>
                 <input maxLength={40} value={title} onChange={onTitle} placeholder='제목을 입력해주세요.' />
+            </div>
+            <div className={styles.categoryContainer}>
+                <input maxLength={20} value={category} onChange={onCategory} placeholder='카테고리를 입력해주세요.' />
             </div>
             <div className={styles.container} onClick={focusEditor}>
                 <div className={styles.tool}>
