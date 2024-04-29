@@ -122,6 +122,7 @@ const IFrameComponent: React.FC<IFrameProps> = (props) => {
 
 function AdminBlogCreate() {
 
+    // decorator
     const decorator = new CompositeDecorator([
         {
             strategy: findLinkEntities,
@@ -161,6 +162,7 @@ function AdminBlogCreate() {
         setEditorState(newEditorState);
     };
 
+    // focus editor
     const focusEditor = () => {
         if (editor.current) {
             editor.current.focus();
@@ -250,29 +252,40 @@ function AdminBlogCreate() {
         if (!e.target.files || e.target.files.length === 0) return;
 
         const file = e.target.files[0];
-        if (file.type.match(/^image\/(png|jpg|jpeg|webp)$/)) {
-            const reader = new FileReader();
-            reader.onload = (e: ProgressEvent<FileReader>) => {
 
-                if (!e.target) return;
-
-                const contentState = editorState.getCurrentContent();
-                const contentStateWithEntity = contentState.createEntity(
-                    'IMAGE',
-                    'IMMUTABLE',
-                    { src: e.target.result }
-                );
-                const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-                const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
-                setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
-
-                // attach image file
-                setFiles(prevFiles => [...prevFiles, { file: file, entityKey: entityKey }]);
-            };
-            reader.readAsDataURL(file);
-        } else {
-            alert('추가 가능한 이미지 파일 형식이 아닙니다.');
+        // file size check
+        if (file.size > 10 * 1024 * 1024) {
+            alert('파일 크기는 10MB를 초과할 수 없습니다.');
+            return; 
         }
+
+        // file type check
+        if (!file.type.match(/^image\/(png|jpg|jpeg|webp)$/)) {
+            alert('추가 가능한 이미지 파일 형식이 아닙니다.');
+            return; 
+        }
+
+        // add image files on the screen
+        const reader = new FileReader();
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+
+            if (!e.target) return;
+
+            const contentState = editorState.getCurrentContent();
+            const contentStateWithEntity = contentState.createEntity(
+                'IMAGE',
+                'IMMUTABLE',
+                { src: e.target.result }
+            );
+            const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+            const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
+            setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
+
+            // attach image file
+            setFiles(prevFiles => [...prevFiles, { file: file, entityKey: entityKey }]);
+        };
+        reader.readAsDataURL(file);
+
     };
 
     // send button
@@ -291,7 +304,7 @@ function AdminBlogCreate() {
             block.findEntityRanges(
                 character => {
                     const entity = character.getEntity();
-                    return entity !== null && entity !== undefined; 
+                    return entity !== null && entity !== undefined;
                 },
                 (start, _end) => {
                     const entityKey = block.getEntityAt(start);
@@ -307,6 +320,7 @@ function AdminBlogCreate() {
             );
         });
 
+        // append files
         files.forEach(({ file, entityKey }) => {
             if (imageEntityKeyList.includes(entityKey)) {
                 formData.append('files', file);
