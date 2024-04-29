@@ -297,6 +297,25 @@ function AdminBlogCreate() {
     // send button
     const onSend = async () => {
 
+        if (!title || title === '') {
+            alert('제목에 공백을 입력할수 없습니다.');
+            return;
+        }
+
+        if (!category || category === '') {
+            alert('카테고리에 공백을 입력할수 없습니다.');
+            return;
+        }
+
+        // Check if editorState is empty
+        const contentState = editorState.getCurrentContent();
+        const textLength = contentState.getPlainText().trim().length;
+
+        if (textLength === 0) {
+            alert('내용에 공백을 입력할수 없습니다.');
+            return;
+        }
+
         const content = convertToRaw(editorState.getCurrentContent());
         const formData = new FormData();
         formData.append('title', title);
@@ -305,7 +324,6 @@ function AdminBlogCreate() {
 
         const imageEntityKeyList: string[] = [];
         // sort out unattached image files
-        const contentState = editorState.getCurrentContent();
         const blocks = contentState.getBlocksAsArray();
         blocks.forEach(block => {
             block.findEntityRanges(
@@ -317,7 +335,6 @@ function AdminBlogCreate() {
                     const entityKey = block.getEntityAt(start);
                     if (entityKey) {
                         const entityType = contentState.getEntity(entityKey).getType();
-                        console.log(`Entity Key: ${entityKey}, Type: ${entityType}`);
 
                         if (entityType === 'IMAGE') {
                             imageEntityKeyList.push(entityKey);
@@ -341,14 +358,12 @@ function AdminBlogCreate() {
                 cache: 'no-store'
             });
 
-            console.log(response);
-
             if (!response.ok) {
                 throw new Error('Failed to save content');
             }
 
             const data = await response.json();
-            console.log(data);
+         
             alert('글 작성이 성공적으로 완료되었습니다.');
         } catch (error) {
             console.error('Error:', error);
