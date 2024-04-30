@@ -281,8 +281,15 @@ function AdminBlogCreate() {
             const contentStateWithEntity = contentState.createEntity(
                 'IMAGE',
                 'IMMUTABLE',
-                { src: e.target.result }
+                {
+                    src: e.target.result,
+                    /* Add more info later here if you want to 100% sure about the order of image sent.
+                       curretnly, if the file names are same among different images, the order gets mixed up. 
+                    */
+                    fileName: file.name, 
+                }
             );
+
             const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
             const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
             setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
@@ -363,7 +370,7 @@ function AdminBlogCreate() {
             }
 
             const data = await response.json();
-         
+
             alert('글 작성이 성공적으로 완료되었습니다.');
         } catch (error) {
             console.error('Error:', error);
