@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "draft-js": "^0.11.7",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.40",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
