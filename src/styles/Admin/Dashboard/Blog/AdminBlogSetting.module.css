@@ -1,0 +1,116 @@
+
+
+/* setting */
+.settingHead {
+    margin-top: 25px;
+    font-weight: 700;
+    font-size: 32px;
+    color: rgb(0, 187, 255);
+}
+
+.settingBody {
+    margin: 10px 0 40px 0;
+    overflow-x: auto;
+}
+
+.settingBody::-webkit-scrollbar {
+    border-radius: 15px;
+    background-color: rgb(70, 70, 70,0.9);
+}
+  
+.settingBody::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: rgb(136, 136, 136);
+}
+
+.settingBody > table {
+    margin: 40px 0;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    min-width: 1200px;
+}
+
+.settingBody > table > thead {
+    border-bottom: 1px solid #ffffff;
+}
+
+.settingBody > table > thead > tr > th , .settingBody > table > thead > tr > td {
+    padding-bottom: 20px;
+}
+
+.settingBody > table > tbody > tr {
+    cursor: pointer;
+}
+
+.settingBody > table > tbody > tr:hover {
+    background-color: #747474;
+    transition: 0.2s ease-in-out;
+}
+
+.settingBody > table > tbody > tr:not(:last-child) {
+    border-bottom: 1px solid #ffffff;
+}
+
+.settingBody > table > tbody > tr > th , .settingBody > table > tbody > tr > td {
+    padding: 20px 0;
+    vertical-align: middle;
+}
+
+.settingBody > table > thead > tr > td:nth-child(3) , .settingBody > table > tbody > tr > td:nth-child(2) {
+    width: 200px;
+}
+
+.settingBody > table > thead > tr > td:nth-child(3) , .settingBody > table > tbody > tr > td:nth-child(3) {
+    width: 400px;
+}
+
+.settingBody > table > tbody > tr > td > button {
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    font-family: 'AppleSDGothicNeo';
+    font-size: 20px;
+    color: white;
+    border: none;
+    background-color: rgb(0, 187, 255);
+}
+
+.settingBody > table > tbody > tr > td > button:hover {
+    border: 3px solid rgb(0, 187, 255);
+    background-color: inherit;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+.settingBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.settingBottom > button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    padding-top: 3px;
+    width: 120px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    font-family: 'AppleSDGothicNeo';
+    font-size: 24px;
+    background-color: rgb(0, 187, 255);
+    color: white;
+    cursor: pointer;
+}
+
+.settingBottom > button:hover {
+    border: 3px solid rgb(0, 187, 255);
+    background-color: inherit;
+    transition: 0.5s ease-in-out;
+}
