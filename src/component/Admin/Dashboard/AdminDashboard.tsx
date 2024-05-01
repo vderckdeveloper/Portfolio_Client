@@ -5,6 +5,7 @@ import styles from '@/styles/Admin/Dashboard/AdminDashboard.module.css';
 
 // component
 import AdminBlogCreate from "./Blog/AdminBlogCreate";
+import AdminBlogSetting from "./Blog/AdminBlogSetting";
 
 interface BlogData {
     blog_index: number;
@@ -13,7 +14,7 @@ interface BlogData {
     blog_category: string;
     blog_title: string;
     blog_content: string;
-    register_date: string;
+    register_date: Date;
     edit_date: string;
     delete_date: string;
     register_ip: string;
@@ -29,6 +30,9 @@ interface AdminDashboardProps {
 }
 
 function AdminDashboard(props: AdminDashboardProps) {
+
+    // page props
+    const blogData = props.blogData;
 
     const MenuItems = {
         DASHBOARD: 'DASHBOARD',
@@ -98,6 +102,12 @@ function AdminDashboard(props: AdminDashboardProps) {
                         menu === MenuItems.BLOG_CREATE
                         &&
                         <AdminBlogCreate />
+                    }
+                    {/* blog setting section */}
+                    {
+                        menu === MenuItems.BLOG_UPDATE
+                        &&
+                        <AdminBlogSetting blogData={blogData}/>
                     }
                 </section>
             </div>
