@@ -28,6 +28,26 @@
     background: #17191c;
 }
 
+/* blog setting header */
+.blogSetting_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.blogSetting_header > svg {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.blogSetting_header > h1 {
+    font-weight: 700;
+    font-size: 32px;
+    color: rgb(0, 187, 255);
+}
+
 /* title */
 .titleContainer > input {
     margin-bottom: 25px;

@@ -151,6 +151,8 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
     const blogTitle = blogSubData.blog_title;
     const blogContent = blogSubData.blog_content;
 
+    const onCloseSettingDetail = props.onCloseSettingDetail;
+
     // decorator
     const decorator = new CompositeDecorator([
         {
@@ -317,7 +319,7 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
                     /* Add more info later here if you want to 100% sure about the order of image sent.
                        curretnly, if the file names are same among different images, the order gets mixed up. 
                     */
-                    fileName: file.name, 
+                    fileName: file.name,
                 }
             );
 
@@ -419,6 +421,13 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
 
     return (
         <>
+            <div className={styles.blogSetting_header}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#e7e7e7" width="40" height="40" viewBox="0 0 512 512" onClick={onCloseSettingDetail}>
+                    <path d="M48,256c0,114.87,93.13,208,208,208s208-93.13,208-208S370.87,48,256,48,48,141.13,48,256Zm212.65-91.36a16,16,0,0,1,.09,22.63L208.42,240H342a16,16,0,0,1,0,32H208.42l52.32,52.73A16,16,0,1,1,238,347.27l-79.39-80a16,16,0,0,1,0-22.54l79.39-80A16,16,0,0,1,260.65,164.64Z">
+                    </path>
+                </svg>
+                <h1>강의 리뷰 설정화면</h1>
+            </div>
             <div className={styles.titleContainer}>
                 <input maxLength={40} value={title} onChange={onTitle} placeholder='제목을 입력해주세요.' />
             </div>
