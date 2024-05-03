@@ -1,5 +1,8 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useMemo } from "react";
 import styles from '@/styles/Admin/Dashboard/Blog/AdminBlogSetting.module.css';
+
+// component
+import AdminBlogSettingDetail from "./AdminBlogSettingDetail";
 
 // utils
 import { convertUtcToKoreanTime } from "../../../../../utils/utils";
@@ -173,9 +176,7 @@ function AdminBlogSetting(props: AdminBlogSettingProps) {
     // page props
     const blogData = props.blogData;
 
-    // state
-    const [blogIndex, setblogIndex] = useState<number | undefined>(undefined);
-    const [blogSubData, setBlogSubData] = useState<BlogData[]>([]);
+    const [blogSubData, setBlogSubData] = useState<BlogData>();
 
     // render setting detail 
     const [renderSettingDetail, setRenderSettingDetail] = useState(false);
@@ -192,15 +193,14 @@ function AdminBlogSetting(props: AdminBlogSettingProps) {
 
     // on set lecture blog sub data
     const onSetBlogSubData = (blogIndex: number) => {
-        const matchedBlogData = blogData.filter(item => item.blog_index === blogIndex);
-        setblogIndex(blogIndex);
+        const matchedBlogData = blogData.find(item => item.blog_index === blogIndex);
         setBlogSubData(matchedBlogData);
     }
 
     return (
-        renderSettingDetail
+        renderSettingDetail && blogSubData
             ?
-            <></>
+            <AdminBlogSettingDetail blogSubData={blogSubData} onCloseSettingDetail={onCloseSettingDetail} />
             :
             <AdminBlogSettingList
                 blogData={blogData}
