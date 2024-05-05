@@ -146,7 +146,7 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
 
     const blogSubData = props.blogSubData;
 
-    const blogUniqueNum = blogSubData.blog_uniqueNum;
+    const blogIndex = blogSubData.blog_index;
     const blogCategory = blogSubData.blog_category;
     const blogTitle = blogSubData.blog_title;
     const blogContent = blogSubData.blog_content;
@@ -337,6 +337,13 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
     // send button
     const onSend = async () => {
 
+        const index = blogIndex;
+
+        if (!index) {
+            alert('인덱스가 존재하지 않습니다!');
+            return;
+        }
+
         if (!title || title === '') {
             alert('제목에 공백을 입력할수 없습니다.');
             return;
@@ -358,6 +365,7 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
 
         const content = convertToRaw(editorState.getCurrentContent());
         const formData = new FormData();
+        formData.append('index', index.toString());
         formData.append('title', title);
         formData.append('category', category);
         formData.append('content', JSON.stringify(content));
@@ -392,7 +400,7 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
         });
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/postBlog`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/updateBlog`, {
                 method: 'POST',
                 body: formData,
                 cache: 'no-store'
