@@ -412,10 +412,50 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
 
             const data = await response.json();
 
-            alert('글 작성이 성공적으로 완료되었습니다.');
+            alert('글 수정이 성공적으로 완료되었습니다.');
         } catch (error) {
             console.error('Error:', error);
-            alert('글 작성에 실패하였습니다.');
+            alert('글 수정에 실패하였습니다.');
+        }
+    }
+
+    // delete button
+    const onDelete = async () => {
+        const index = blogIndex;
+
+        if (!index) {
+            alert('인덱스가 존재하지 않습니다!');
+            return;
+        }
+
+        try {
+
+            const confirmResult = window.confirm('삭제하시겠습니까?');
+
+            // return if user choose no
+            if(!confirmResult) {
+                return;
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/deleteBlog`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ index: blogIndex }),
+                cache: 'no-store'
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete content');
+            }
+
+            const data = await response.json();
+
+            alert('글 삭제가 성공적으로 완료되었습니다.');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('글 삭제에 실패하였습니다.');
         }
     }
 
@@ -430,11 +470,22 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
     return (
         <>
             <div className={styles.blogSetting_header}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#e7e7e7" width="40" height="40" viewBox="0 0 512 512" onClick={onCloseSettingDetail}>
-                    <path d="M48,256c0,114.87,93.13,208,208,208s208-93.13,208-208S370.87,48,256,48,48,141.13,48,256Zm212.65-91.36a16,16,0,0,1,.09,22.63L208.42,240H342a16,16,0,0,1,0,32H208.42l52.32,52.73A16,16,0,1,1,238,347.27l-79.39-80a16,16,0,0,1,0-22.54l79.39-80A16,16,0,0,1,260.65,164.64Z">
-                    </path>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#e7e7e7" width="40" height="40" viewBox="0 0 512 512" onClick={onCloseSettingDetail}>
+                        <path d="M48,256c0,114.87,93.13,208,208,208s208-93.13,208-208S370.87,48,256,48,48,141.13,48,256Zm212.65-91.36a16,16,0,0,1,.09,22.63L208.42,240H342a16,16,0,0,1,0,32H208.42l52.32,52.73A16,16,0,1,1,238,347.27l-79.39-80a16,16,0,0,1,0-22.54l79.39-80A16,16,0,0,1,260.65,164.64Z">
+                        </path>
+                    </svg>
+                    <h1>블로그 글 설정화면</h1>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="#ffffff"
+                    onClick={onDelete}
+                >
+                    <path d="M19 9H22M19 14H22M19 19H21M16 6L15.1991 18.0129C15.129 19.065 15.0939 19.5911 14.8667 19.99C14.6666 20.3412 14.3648 20.6235 14.0011 20.7998C13.588 21 13.0607 21 12.0062 21H7.99377C6.93927 21 6.41202 21 5.99889 20.7998C5.63517 20.6235 5.33339 20.3412 5.13332 19.99C4.90607 19.5911 4.871 19.065 4.80086 18.0129L4 6M2 6H18M14 6L13.7294 5.18807C13.4671 4.40125 13.3359 4.00784 13.0927 3.71698C12.8779 3.46013 12.6021 3.26132 12.2905 3.13878C11.9376 3 11.523 3 10.6936 3H9.30643C8.47705 3 8.06236 3 7.70951 3.13878C7.39792 3.26132 7.12208 3.46013 6.90729 3.71698C6.66405 4.00784 6.53292 4.40125 6.27064 5.18807L6 6M12 10V17M8 10L7.99995 16.9998" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <h1>강의 리뷰 설정화면</h1>
             </div>
             <div className={styles.titleContainer}>
                 <input maxLength={40} value={title} onChange={onTitle} placeholder='제목을 입력해주세요.' />
