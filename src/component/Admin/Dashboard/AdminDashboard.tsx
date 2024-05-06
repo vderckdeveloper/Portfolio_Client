@@ -38,7 +38,6 @@ function AdminDashboard(props: AdminDashboardProps) {
         DASHBOARD: 'DASHBOARD',
         BLOG_CREATE: 'BLOG_CREATE',
         BLOG_UPDATE: 'BLOG_UPDATE',
-        BLOG_DELETE: 'BLOG_DELETE',
     };
 
     const [menu, setMenu] = useState(MenuItems.DASHBOARD);
@@ -82,10 +81,6 @@ function AdminDashboard(props: AdminDashboardProps) {
                             <div
                                 className={menu === MenuItems.BLOG_UPDATE ? styles.clicked : ''}
                                 onClick={() => setMenu(MenuItems.BLOG_UPDATE)}>블로그 수정
-                            </div>
-                            <div
-                                className={menu === MenuItems.BLOG_DELETE ? styles.clicked : ''}
-                                onClick={() => setMenu(MenuItems.BLOG_DELETE)}>블로그 삭제
                             </div>
                         </section>
                     }
