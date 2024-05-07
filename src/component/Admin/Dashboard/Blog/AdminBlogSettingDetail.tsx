@@ -410,8 +410,6 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
                 throw new Error('Failed to save content');
             }
 
-            const data = await response.json();
-
             alert('글 수정이 성공적으로 완료되었습니다.');
         } catch (error) {
             console.error('Error:', error);
@@ -449,8 +447,6 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
             if (!response.ok) {
                 throw new Error('Failed to delete content');
             }
-
-            const data = await response.json();
 
             alert('글 삭제가 성공적으로 완료되었습니다.');
         } catch (error) {

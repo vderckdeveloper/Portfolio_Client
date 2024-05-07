@@ -369,8 +369,6 @@ function AdminBlogCreate() {
                 throw new Error('Failed to save content');
             }
 
-            const data = await response.json();
-
             alert('글 작성이 성공적으로 완료되었습니다.');
         } catch (error) {
             console.error('Error:', error);
