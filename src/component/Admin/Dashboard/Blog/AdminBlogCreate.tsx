@@ -366,10 +366,14 @@ function AdminBlogCreate() {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to save content');
+                const errorData =  await response.json();
+                console.log(errorData);
+                throw new Error('Failed to post content');
             }
 
             alert('글 작성이 성공적으로 완료되었습니다.');
+            window.location.href = '/admin/dashboard';
+
         } catch (error) {
             console.error('Error:', error);
             alert('글 작성에 실패하였습니다.');

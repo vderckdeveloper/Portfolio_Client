@@ -407,10 +407,14 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to save content');
+                const errorData =  await response.json();
+                console.log(errorData);
+                throw new Error('Failed to update content');
             }
 
             alert('글 수정이 성공적으로 완료되었습니다.');
+            window.location.href = '/admin/dashboard';
+
         } catch (error) {
             console.error('Error:', error);
             alert('글 수정에 실패하였습니다.');
@@ -419,7 +423,8 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
 
     // delete button
     const onDelete = async () => {
-        const index = blogIndex;
+        // stringfy blog index
+        const index = blogIndex.toString();
 
         if (!index) {
             alert('인덱스가 존재하지 않습니다!');
@@ -440,15 +445,19 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ index: blogIndex }),
+                body: JSON.stringify({ index: index }),
                 cache: 'no-store'
             });
 
             if (!response.ok) {
+                const errorData =  await response.json();
+                console.log(errorData);
                 throw new Error('Failed to delete content');
             }
 
             alert('글 삭제가 성공적으로 완료되었습니다.');
+            window.location.href = '/admin/dashboard';
+
         } catch (error) {
             console.error('Error:', error);
             alert('글 삭제에 실패하였습니다.');
