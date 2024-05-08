@@ -90,7 +90,7 @@ function AdminDashboard(props: AdminDashboardProps) {
                     {
                         menu === MenuItems.DASHBOARD
                         &&
-                        <p>대쉬보드 홈 화면</p>
+                        <h2>오늘도 좋은하루가 될거야! 승민아 :)</h2>
                     }
                     {/* blog add section */}
                     {
