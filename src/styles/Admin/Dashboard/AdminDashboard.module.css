@@ -26,6 +26,12 @@
     margin: 20px 0;
 }
 
+.main > h2 {
+    margin-top: 20px;
+    font-weight: 800;
+    font-size: 32px;
+}
+
 /* side bar */
 .sidebar {
     position: sticky;
