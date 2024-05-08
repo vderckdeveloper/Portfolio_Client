@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState, convertToRaw } from 'draft-js';
+import { Editor, EditorState, AtomicBlockUtils, RichUtils, CompositeDecorator, ContentBlock, ContentState, convertToRaw, } from 'draft-js';
 
 import styles from '@/styles/Admin/Dashboard/Blog/AdminBlogCreate.module.css';
 
@@ -145,6 +145,12 @@ function AdminBlogCreate() {
         EditorState.createEmpty(decorator)
     );
     const [readOnly, setReadOnly] = useState(false);
+    const [textColor, setTextColor] = useState('#ffffff');
+
+    // color map
+    const colorStyleMap = {
+        [`COLOR_${textColor}`]: { color: textColor }
+    };
 
     // image files
     const [files, setFiles] = useState<{ file: File; entityKey: string }[]>([]);
@@ -196,6 +202,22 @@ function AdminBlogCreate() {
         e.preventDefault();
         setEditorState(RichUtils.toggleBlockType(editorState, blockType));
     }
+
+    // handle color change
+    const onHandleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTextColor(e.target.value);
+    };
+
+    // toggle color change
+    const onToggleColor = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const newEditorState = RichUtils.toggleInlineStyle(
+          editorState,
+          `COLOR_${textColor}`
+        );
+        setEditorState(newEditorState);
+
+    };
 
     // prompt for link
     const promptForLink = (e: React.MouseEvent) => {
@@ -286,7 +308,7 @@ function AdminBlogCreate() {
                     /* Add more info later here if you want to 100% sure about the order of image sent.
                        curretnly, if the file names are same among different images, the order gets mixed up. 
                     */
-                    fileName: file.name, 
+                    fileName: file.name,
                 }
             );
 
@@ -366,7 +388,7 @@ function AdminBlogCreate() {
             });
 
             if (!response.ok) {
-                const errorData =  await response.json();
+                const errorData = await response.json();
                 console.log(errorData);
                 throw new Error('Failed to post content');
             }
@@ -434,6 +456,8 @@ function AdminBlogCreate() {
                     <button onMouseDown={(e) => { onToggleBlockType(e, 'header-five') }}>H5</button>
                     <button onMouseDown={(e) => { onToggleBlockType(e, 'header-six') }}>H6</button>
                     <button onMouseDown={(e) => { onToggleBlockType(e, 'unstyled') }}>P</button>
+                    <input type="color" value={textColor} onChange={onHandleColorChange} />
+                    <button onMouseDown={onToggleColor}>AC</button>
                     <button onMouseDown={(e) => { onToggleBlockType(e, 'unordered-list-item') }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" stroke="#000000" fill="#000000" strokeWidth="0" viewBox="0 0 24 24">
                             <path fill="none" d="M0 0h24v24H0z"></path><path d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z"></path>
@@ -488,6 +512,7 @@ function AdminBlogCreate() {
                 </div>
                 <div className={styles.editorWrapper}>
                     <Editor
+                        customStyleMap={colorStyleMap}
                         placeholder='내용을 입력해주세요.'
                         editorState={editorState}
                         onChange={onEditorState}

@@ -144,6 +144,7 @@ const IFrameComponent: React.FC<IFrameProps> = (props) => {
 
 function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
 
+    // page data
     const blogSubData = props.blogSubData;
 
     const blogIndex = blogSubData.blog_index;
@@ -169,8 +170,49 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
         }
     ]);
 
-    // modify state from server
-    const contentState = convertFromRaw(JSON.parse(blogContent));
+    // color state
+    const [textColor, setTextColor] = useState('#ffffff');
+
+    // color map
+    const colorStyleMap = {
+        [`COLOR_${textColor}`]: { color: textColor }
+    };
+
+    // process blog content 
+    const processBlogContent = (blogContent: string) => {
+
+        // convert from raw
+        const contentState = convertFromRaw(JSON.parse(blogContent));
+
+        // apply color change
+        contentState.getBlockMap().forEach(block => {
+
+            if (!block) return;
+
+            block.findStyleRanges(
+                (char) => {
+                    return char.getStyle().some(style => style!.startsWith('COLOR_'));
+                },
+                (start, _end) => {
+                    const styles = block.getInlineStyleAt(start);
+
+                    styles.forEach(style => {
+                        if (style!.startsWith('COLOR_')) {
+                            const color = style!.split('_')[1];
+                            const styleKey = `COLOR_${color}`;
+                            if (!colorStyleMap[styleKey]) {
+                                colorStyleMap[styleKey] = { color: `${color}` };
+                            }
+                        }
+                    });
+                }
+            );
+        });
+        return contentState;
+    };
+
+    // modify state with process blog content
+    const contentState = processBlogContent(blogContent);
     const newEditorState = EditorState.createWithContent(contentState, decorator);
 
     // state
@@ -229,6 +271,22 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
         e.preventDefault();
         setEditorState(RichUtils.toggleBlockType(editorState, blockType));
     }
+
+    // handle color change
+    const onHandleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTextColor(e.target.value);
+    };
+
+    // toggle color change
+    const onToggleColor = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const newEditorState = RichUtils.toggleInlineStyle(
+          editorState,
+          `COLOR_${textColor}`
+        );
+        setEditorState(newEditorState);
+
+    };
 
     // prompt for link
     const promptForLink = (e: React.MouseEvent) => {
@@ -407,7 +465,7 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
             });
 
             if (!response.ok) {
-                const errorData =  await response.json();
+                const errorData = await response.json();
                 console.log(errorData);
                 throw new Error('Failed to update content');
             }
@@ -436,7 +494,7 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
             const confirmResult = window.confirm('삭제하시겠습니까?');
 
             // return if user choose no
-            if(!confirmResult) {
+            if (!confirmResult) {
                 return;
             }
 
@@ -450,7 +508,7 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
             });
 
             if (!response.ok) {
-                const errorData =  await response.json();
+                const errorData = await response.json();
                 console.log(errorData);
                 throw new Error('Failed to delete content');
             }
@@ -536,6 +594,8 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
                     <button onMouseDown={(e) => { onToggleBlockType(e, 'header-five') }}>H5</button>
                     <button onMouseDown={(e) => { onToggleBlockType(e, 'header-six') }}>H6</button>
                     <button onMouseDown={(e) => { onToggleBlockType(e, 'unstyled') }}>P</button>
+                    <input type="color" value={textColor} onChange={onHandleColorChange} />
+                    <button onMouseDown={onToggleColor}>AC</button>
                     <button onMouseDown={(e) => { onToggleBlockType(e, 'unordered-list-item') }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" stroke="#000000" fill="#000000" strokeWidth="0" viewBox="0 0 24 24">
                             <path fill="none" d="M0 0h24v24H0z"></path><path d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM8 11h13v2H8v-2zm0 7h13v2H8v-2z"></path>
@@ -590,6 +650,7 @@ function AdminBlogSettingDetail(props: AdminBlogSettingDetailProps) {
                 </div>
                 <div className={styles.editorWrapper}>
                     <Editor
+                        customStyleMap={colorStyleMap}
                         placeholder='내용을 입력해주세요.'
                         editorState={editorState}
                         onChange={onEditorState}
