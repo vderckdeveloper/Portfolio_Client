@@ -105,8 +105,8 @@
 }
 
 .editorWrapper > div > div > div > div > pre {
-    margin-right: 25px;
     padding: 25px;
+    max-width: fit-content;
     border-radius: 8px;
     background-color: #ababab;
     overflow-x: auto;
