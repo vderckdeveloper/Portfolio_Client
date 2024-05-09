@@ -124,7 +124,7 @@ function Sidebar(props: SidebarProps) {
                                             &&
                                             posts.map(post => {
                                                 return (
-                                                    <Link key={post.blog_index} className={activePost === post.blog_index ? styles.blogPostActive : styles.blogPost} href={'#'} onClick={() => handlePostClick(post.blog_index)}>
+                                                    <Link key={post.blog_index} className={activePost === post.blog_index ? styles.blogPostActive : styles.blogPost} href={`/blog?index=${post.blog_index}`} onClick={() => handlePostClick(post.blog_index)}>
                                                         <div >{post.blog_title}</div>
                                                     </Link>
                                                 );
