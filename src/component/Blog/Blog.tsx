@@ -21,6 +21,7 @@ interface BlogData {
 
 interface BlogProps {
     blogData: BlogData[];
+    blogContentData: BlogData,
     error?: string;
 }
 
@@ -28,11 +29,12 @@ function Blog(props: BlogProps) {
 
     // page props
     const blogData = props.blogData;
+    const blogContentData = props.blogContentData;
 
     return (
         <section className={styles.wrapper}>
             <Sidebar blogData={blogData} />
-            <BlogBody blogData={blogData} />
+            <BlogBody blogData={blogData} blogContentData={blogContentData} />
         </section>
     );
 }

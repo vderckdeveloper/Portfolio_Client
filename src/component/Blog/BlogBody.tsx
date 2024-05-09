@@ -24,6 +24,7 @@ interface BlogData {
 
 interface BlogBodyProps {
     blogData: BlogData[];
+    blogContentData: BlogData,
     error?: string;
 }
 
@@ -31,18 +32,16 @@ function BlogBody(props: BlogBodyProps) {
 
     // page props
     const blogData = props.blogData;
-
-    // fix the code below later, only the specific blog data should be retrived from database
-    const blogSubdata = blogData.find(item => item.blog_index === 31);
+    const blogContentData = props.blogContentData;
 
     return (
         <section className={styles.wrapper}>
             <MobileToolbar blogData={blogData} />
             <Toolbar />
             {
-                blogSubdata
+                blogContentData
                 &&
-                <BlogBodyContent blogSubData={blogSubdata}/>
+                <BlogBodyContent blogContentData={blogContentData} />
             }
             <Footer />
         </section>

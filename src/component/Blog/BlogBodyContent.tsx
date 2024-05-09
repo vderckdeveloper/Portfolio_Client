@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { EditorState, CompositeDecorator, ContentBlock, ContentState, convertFromRaw } from 'draft-js';
 
 // Import Editor component dynamically without SSR
@@ -10,7 +10,7 @@ const Editor = dynamic(
 
 import styles from '@/styles/Blog/BlogBodyContent.module.css';
 
-interface BlogSubData {
+interface BlogData {
     blog_index: number;
     blog_uniqueNum: number;
     admin_identification: string;
@@ -28,7 +28,7 @@ interface BlogSubData {
 }
 
 interface BlogBodyContentProps {
-    blogSubData: BlogSubData;
+    blogContentData: BlogData;
 }
 
 interface LinkProps {
@@ -151,11 +151,10 @@ const IFrameComponent: React.FC<IFrameProps> = (props) => {
 function BlogBodyContent(props: BlogBodyContentProps) {
 
     // page data
-    const blogSubData = props.blogSubData;
+    const blogContentData = props.blogContentData;
 
-    const blogCategory = blogSubData.blog_category;
-    const blogTitle = blogSubData.blog_title;
-    const blogContent = blogSubData.blog_content;
+    const blogTitle = blogContentData.blog_title;
+    const blogContent = blogContentData.blog_content;
 
     // decorator
     const decorator = new CompositeDecorator([
@@ -225,6 +224,14 @@ function BlogBodyContent(props: BlogBodyContentProps) {
     const onEditorState = (newEditorState: EditorState) => {
         setEditorState(newEditorState);
     };
+
+    // force re-rendering
+    useEffect(() => {
+        const contentState = processBlogContent(blogContent);
+        const newEditorState = EditorState.createWithContent(contentState, decorator);
+        setEditorState(newEditorState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [blogContent]);
 
     return (
         <article className={styles.container}>
