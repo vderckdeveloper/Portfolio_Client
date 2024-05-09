@@ -6,14 +6,32 @@ import Blog from "@/component/Blog/Blog";
 // type
 import { GetServerSidePropsContext } from 'next';
 
+interface BlogData {
+  blog_index: number;
+  blog_uniqueNum: number;
+  admin_identification: string;
+  blog_category: string;
+  blog_title: string;
+  blog_content: string;
+  register_date: string;
+  edit_date: string;
+  delete_date: string;
+  register_ip: string;
+  edit_ip: string;
+  delete_ip: string;
+  blog_is_deleted: boolean;
+  blog_is_approved: boolean;
+}
+
 interface BlogProps {
   adminId: string;
   checkLoginStatus: boolean;
-  blogData: [];
+  blogData: BlogData[];
+  blogContentData: BlogData,
   error?: string;
 }
 
-export default function BlogPage({ adminId, checkLoginStatus, blogData, error }: BlogProps) {
+export default function BlogPage({ adminId, checkLoginStatus, blogData, blogContentData, error }: BlogProps) {
   return (
     <>
       <Head>
@@ -22,7 +40,7 @@ export default function BlogPage({ adminId, checkLoginStatus, blogData, error }:
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Blog blogData={blogData} error={error} />
+      <Blog blogData={blogData} blogContentData={blogContentData} error={error} />
     </>
   );
 }
@@ -30,10 +48,11 @@ export default function BlogPage({ adminId, checkLoginStatus, blogData, error }:
 export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const cookie = context.req.headers.cookie || '';
+  const blogIndex = context.query.index;
 
   try {
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_ON_SERVER_SIDE_PROPS}/getMainPage`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_ON_SERVER_SIDE_PROPS}/getBlogPage?index=${blogIndex}`, {
       method: 'GET',
       headers: {
         Cookie: cookie
@@ -51,8 +70,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const adminId = data.adminId;
     const checkLoginStatus = data.checkLoginStatus;
     const blogData = data.blogData;
+    const blogContentData = data.blogContentData;
 
-    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData } };
+    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogContentData: blogContentData, blogData: blogData } };
 
   } catch (err) {
 
@@ -61,11 +81,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       adminId: '',
       checkLoginStatus: false,
       blogData: [],
+      blogContentData: undefined,
     };
 
     const adminId = fallBackData.adminId;
     const checkLoginStatus = fallBackData.checkLoginStatus;
     const blogData = fallBackData.blogData;
+    const blogContentData = fallBackData.blogContentData;
 
     // log error
     console.log(err);
@@ -73,7 +95,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const error = err as Error;
     const errorMessage = error.message;
 
-    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, error: errorMessage } };
+    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, blogContentData: blogContentData, error: errorMessage } };
   }
 
 }
