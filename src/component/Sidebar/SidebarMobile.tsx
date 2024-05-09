@@ -1,6 +1,7 @@
 import { useState, useMemo, forwardRef, ForwardedRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import sidebarProfileImage from '../../../public/image/sidebar/240405_sidebarProfile_Image_Ver1.0.png';
 import styles from '@/styles/Sidebar/SidebarMobile.module.css';
 
@@ -42,10 +43,21 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
     // home menu
     const homeMenu = 'HOME';
 
+    // router
+    const router = useRouter();
+
+    // blog index
+    const blogIndex = router.query.index;
+    const blogIndexToNum = typeof blogIndex === 'string' ? parseInt(blogIndex) : null;
+
+    // initial category
+    const selectedBlogData = blogData.find(item => item.blog_index === blogIndexToNum);
+    const selectedBlogCategory = selectedBlogData?.blog_category;
+
     // state
-    const [menu, setMenu] = useState(homeMenu);
-    const [openCategory, setOpenCategory] = useState<Record<string, boolean>>({});
-    const [activePost, setActivePost] = useState<number | null>(null);
+    const [menu, setMenu] = useState(blogIndex ? '' : homeMenu);
+    const [openCategory, setOpenCategory] = useState<Record<string, boolean>>(selectedBlogCategory ? { [selectedBlogCategory]: true } : {});
+    const [activePost, setActivePost] = useState<number | null>(blogIndexToNum ? blogIndexToNum : null);
 
     // blog category data
     const categoryData = useMemo(() => {
@@ -64,7 +76,7 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
 
     // toggle category
     const toggleCategory = (category: string) => {
-        if(openCategory[category]) {
+        if (openCategory[category]) {
             setMenu('');
         } else {
             setActivePost(null);
@@ -112,9 +124,9 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
                 {/* 메뉴 카테고리 */}
                 <nav className={styles.categoryBox}>
                     <ol>
-                         {/* home */}
-                         <div>
-                            <Link className={menu === homeMenu ? styles.active : ''} href={`#`} onClick={() => setMenu(homeMenu)}>
+                        {/* home */}
+                        <div>
+                            <Link className={menu === homeMenu ? styles.active : ''} href={`/`} onClick={() => setMenu(homeMenu)}>
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -132,7 +144,7 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
 
                                 return (
                                     <div key={index}>
-                                        <Link className={menu === category ? styles.active : ''} href={`#`} onClick={() => { setMenu(category); toggleCategory(category); }}>
+                                        <div className={menu === category ? styles.active : ''} onClick={() => { setMenu(category); toggleCategory(category); }}>
                                             <li>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -140,7 +152,7 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
                                                 </svg>
                                                 <p>{category}</p>
                                             </li>
-                                        </Link>
+                                        </div>
                                         {
                                             openCategory[category]
                                             &&
