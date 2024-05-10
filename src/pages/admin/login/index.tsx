@@ -8,14 +8,14 @@ import AdminFooter from "@/component/Admin/Footer/AdminFooter";
 // type
 import { GetServerSidePropsContext } from 'next';
 
-interface AdminDashboardProps {
+interface AdminLoginProps {
   adminId: string;
   checkLoginStatus: boolean;
   blogData: [];
   error?: string;
 }
 
-export default function AdminLoginPage({ adminId, checkLoginStatus, blogData, error }: AdminDashboardProps) {
+export default function AdminLoginPage({ adminId, checkLoginStatus, blogData, error }: AdminLoginProps) {
   return (
     <>
       <Head>
