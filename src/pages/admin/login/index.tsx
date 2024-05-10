@@ -15,7 +15,7 @@ interface AdminDashboardProps {
   error?: string;
 }
 
-export default function AdminDashboardPage({ adminId, checkLoginStatus, blogData, error }: AdminDashboardProps) {
+export default function AdminLoginPage({ adminId, checkLoginStatus, blogData, error }: AdminDashboardProps) {
   return (
     <>
       <Head>
