@@ -10,18 +10,9 @@
   .toolbar > div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     width: 80%;
-  }
-
-  .toolbar > div > .toolbar_Logo > a {
-    display: block;
-    height: 57px;
-  }
-  
-  .toolbar > div > .toolbar_Logo > a > img {
-    width: 200px;
   }
   
   .toolbar > div > .toolbar_account {
