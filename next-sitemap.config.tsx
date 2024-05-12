@@ -1,0 +1,32 @@
+/** @type {import('next-sitemap').IConfig} */
+const sitemapConfig = {
+    siteUrl: process.env.NEXT_SITE_MAP_URL || 'https://seungminleedev.com',
+    generateRobotsTxt: true,
+    changefreq: 'daily',
+    generateIndexSitemap: false,
+    sitemapSize: 7000,
+    priority: 1,
+    exclude: [
+        '/admin',
+        '/admin/*',
+        '/test',
+    ],
+    robotsTxtOptions: {
+        policies: [
+            {
+                userAgent: '*',
+                allow: '/',
+                disallow: [
+                    '/admin',
+                    '/admin/*',
+                    '/test',
+                ]
+            },
+        ],
+        additionalSitemaps: [
+            `${process.env.NEXT_SITE_MAP_URL}/sitemap/customsitemap.xml`,
+        ],
+    }
+}
+
+module.exports = sitemapConfig;
