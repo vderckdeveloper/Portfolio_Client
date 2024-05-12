@@ -24,7 +24,7 @@ export default function AdminDashboardPage({ adminId, checkLoginStatus, blogData
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AdminToolbar />
+      <AdminToolbar adminId={adminId} checkLoginStatus={checkLoginStatus} />
       <AdminDashboard blogData={blogData} error={error} />
       <AdminFooter />
     </>
@@ -49,12 +49,31 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // const data = await response.json();
+    // redirect if admin is not logged-in
+    if (response.status === 401) {
+      return {
+        redirect: {
+          destination: '/admin/login',
+          permanent: false,
+        },
+      };
+    }
+
     const data = await response.json();
 
     const adminId = data.adminId;
     const checkLoginStatus = data.checkLoginStatus;
     const blogData = data.blogData;
+
+    // redirect an admin to the login page. 
+    if (!checkLoginStatus) {
+      return {
+        redirect: {
+          destination: '/admin/login',
+          permanent: false,
+        },
+      };
+    }
 
     return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData } };
 
@@ -70,6 +89,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const adminId = fallBackData.adminId;
     const checkLoginStatus = fallBackData.checkLoginStatus;
     const blogData = fallBackData.blogData;
+
+    // redirect an admin to the login page. 
+    const isCookiedIncluded = cookie && cookie.includes('login_session');
+    if (!isCookiedIncluded) {
+      return {
+        redirect: {
+          destination: '/admin/login',
+          permanent: false,
+        },
+      };
+    }
 
     // log error
     console.log(err);
