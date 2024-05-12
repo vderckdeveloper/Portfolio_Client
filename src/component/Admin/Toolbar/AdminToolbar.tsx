@@ -1,7 +1,5 @@
 import { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
-// import Logo from '../../../../public/Image/Logo/231019_Seoul_U_edu_Admin_Logo_Ver1.0.png';
 import styles from '@/styles/Admin/Toolbar/AdminToolbar.module.css';
 
 interface AdminToolbarProps {
@@ -51,7 +49,7 @@ function AdminToolbar(props: AdminToolbarProps) {
         })
             .then(() => {
                 alert('로그아웃 하셨습니다!');
-                window.location.href = '/admin/logout';
+                window.location.href = '/admin/login';
             })
             .catch((error) => {
                 const statusCode = error.status;
@@ -70,11 +68,6 @@ function AdminToolbar(props: AdminToolbarProps) {
         <>
             <nav className={styles.toolbar}>
                 <div>
-                    <div className={styles.toolbar_Logo}>
-                        <Link href="/admin/dashboard">
-                            {/* <Image src={Logo} alt='Logo' style={{ height: 'auto' }} priority={true} /> */}
-                        </Link>
-                    </div>
                     <div className={styles.toolbar_account}>
                         {
                             isLoggedin
