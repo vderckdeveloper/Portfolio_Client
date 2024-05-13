@@ -84,7 +84,7 @@ Folder structure bellow will be updated later
 ## 🌐 OFFICAL WEBSITE (TBA)
 
 Link below will be updated later 
-Open [https://seungminleeportfolio.com](https://seungminleeportfolio.com)
+Open [https://seungmindev.com](https://seungmindev.com)
 
 &nbsp; 
 ## 🔒 LICENSE
