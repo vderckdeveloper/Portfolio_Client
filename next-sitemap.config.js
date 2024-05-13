@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 const sitemapConfig = {
-    siteUrl: process.env.NEXT_SITE_MAP_URL || 'https://seungminleedev.com',
+    siteUrl: process.env.NEXT_SITE_MAP_URL || 'https://seungdev.com',
     generateRobotsTxt: true,
     changefreq: 'daily',
     generateIndexSitemap: false,
