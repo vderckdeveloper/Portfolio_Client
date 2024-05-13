@@ -113,7 +113,7 @@ function MainPortfolioProject(props: MainPortfolioProjectProps) {
                                 </span>
                             </div>
                         </section>
-                        <a href='https://seouluedu.com'>
+                        <a href='https://seungmindev.com'>
                             <p>프로젝트 보기</p>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#c4cfde" width="18" height="18" version="1.1" viewBox="0 0 492.004 492.004">
                                 <g>
