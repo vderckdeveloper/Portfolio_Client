@@ -1,5 +1,6 @@
 import MobileToolbar from "../Toolbar/MobileToolbar";
 import Toolbar from "../Toolbar/Toolbar";
+import MainBlog from "./MainBlog";
 import MainProfie from "./MainProfile";
 import BottomMargin from "@/sharedComponent/Margin/BottomMargin";
 import LineBoundary from "@/sharedComponent/Boundary/LineBoundary";
@@ -30,6 +31,7 @@ interface BlogData {
 
 interface MainBodyProps {
     blogData: BlogData[];
+    blogMainData: BlogData[];
     error?: string;
 }
 
@@ -47,27 +49,41 @@ function MainBody(props: MainBodyProps) {
 
     // page props
     const blogData = props.blogData;
+    const blogMainData = props.blogMainData;
 
-    const LeftDescriptionContent: LeftDescriptionContent = {
-        title: '전문 능력',
-        body: '갖추고 있는 저의 능력을 소개합니다.'
+    const CenterDescriptionContentOne: LeftDescriptionContent = {
+        title: '프로필',
+        body: '개발자 프로필'
     }
 
-    const CenterDescriptionContent: CenterDescriptionContent = {
+    const CenterDescriptionContentTwo: CenterDescriptionContent = {
         title: '프로젝트',
         body: '진행했던 프로젝트를 소개합니다.'
+    }
+
+    const LeftDescriptionContentOne: LeftDescriptionContent = {
+        title: '최신글',
+        body: '최신 글 목록'
+    }
+
+    const LeftDescriptionContentTwo: LeftDescriptionContent = {
+        title: '전문 능력',
+        body: '갖추고 있는 저의 능력을 소개합니다.'
     }
 
     return (
         <section className={styles.wrapper}>
             <MobileToolbar blogData={blogData} />
             <Toolbar />
+            <LeftDescription content={LeftDescriptionContentOne}/>
+            <MainBlog blogMainData={blogMainData} />
+            <CenterDescription content={CenterDescriptionContentOne}/>
             <MainProfie />
             <LineBoundary />
             <BottomMargin />
-            <LeftDescription content={LeftDescriptionContent}/>
+            <LeftDescription content={LeftDescriptionContentTwo}/>
             <MainCapability />
-            <CenterDescription content={CenterDescriptionContent}/>
+            <CenterDescription content={CenterDescriptionContentTwo}/>
             <MainProject />
             <Footer />
         </section>

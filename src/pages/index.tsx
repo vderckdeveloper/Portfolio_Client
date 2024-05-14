@@ -10,10 +10,11 @@ interface HomeProps {
   adminId: string;
   checkLoginStatus: boolean;
   blogData: [];
+  blogMainData: [];
   error?: string;
 }
 
-export default function Home({ adminId, checkLoginStatus, blogData, error }: HomeProps) {
+export default function Home({ adminId, checkLoginStatus, blogData, blogMainData, error }: HomeProps) {
   return (
     <>
       <Head>
@@ -25,7 +26,7 @@ export default function Home({ adminId, checkLoginStatus, blogData, error }: Hom
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Main blogData={blogData} error={error} />
+      <Main blogData={blogData} blogMainData={blogMainData} error={error} />
     </>
   );
 }
@@ -54,8 +55,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const adminId = data.adminId;
     const checkLoginStatus = data.checkLoginStatus;
     const blogData = data.blogData;
+    const blogMainData = data.blogMainData;
 
-    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData } };
+    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, blogMainData: blogMainData } };
 
   } catch (err) {
 
@@ -64,11 +66,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       adminId: '',
       checkLoginStatus: false,
       blogData: [],
+      blogMainData: [],
     };
 
     const adminId = fallBackData.adminId;
     const checkLoginStatus = fallBackData.checkLoginStatus;
     const blogData = fallBackData.blogData;
+    const blogMainData = fallBackData.blogMainData;
 
     // log error
     console.log(err);
@@ -76,7 +80,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const error = err as Error;
     const errorMessage = error.message;
 
-    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, error: errorMessage } };
+    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, blogMainData: blogMainData, error: errorMessage } };
   }
 
 }

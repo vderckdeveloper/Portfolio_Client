@@ -21,6 +21,7 @@ interface BlogData {
 
 interface MainProps {
     blogData: BlogData[];
+    blogMainData: BlogData[];
     error?: string;
 }
 
@@ -28,11 +29,12 @@ function Main(props: MainProps) {
 
     // page props
     const blogData = props.blogData;
+    const blogMainData = props.blogMainData;
 
     return (
         <section className={styles.wrapper}>
             <Sidebar blogData={blogData} />
-            <MainBody blogData={blogData} />
+            <MainBody blogData={blogData} blogMainData={blogMainData} />
         </section>
     );
 }
