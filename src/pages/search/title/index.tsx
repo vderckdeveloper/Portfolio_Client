@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 // components
-import Main from "@/component/Main/Main";
+import SearchTitle from "@/component/Search/SearchTitle";
 
 // type
 import { GetServerSidePropsContext } from 'next';
@@ -10,10 +10,11 @@ interface SearchTitleProps {
   adminId: string;
   checkLoginStatus: boolean;
   blogData: [];
+  blogSearchTitleData: [];
   error?: string;
 }
 
-export default function Home({ adminId, checkLoginStatus, blogData, error }: SearchTitleProps) {
+export default function Home({ adminId, checkLoginStatus, blogData, blogSearchTitleData, error }: SearchTitleProps) {
   return (
     <>
       <Head>
@@ -25,7 +26,7 @@ export default function Home({ adminId, checkLoginStatus, blogData, error }: Sea
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <Main blogData={blogData} error={error} /> */}
+      <SearchTitle blogData={blogData} blogSearchTitleData={blogSearchTitleData} error={error} />
     </>
   );
 }
@@ -33,10 +34,11 @@ export default function Home({ adminId, checkLoginStatus, blogData, error }: Sea
 export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const cookie = context.req.headers.cookie || '';
+  const title = context.query.title;
 
   try {
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_ON_SERVER_SIDE_PROPS}/getMainPage`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_ON_SERVER_SIDE_PROPS}/getSearchTitlePage?title=${title}`, {
       method: 'GET',
       headers: {
         Cookie: cookie
@@ -54,8 +56,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const adminId = data.adminId;
     const checkLoginStatus = data.checkLoginStatus;
     const blogData = data.blogData;
+    const blogSearchTitleData = data.blogSearchTitleData;
 
-    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData } };
+    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, blogSearchTitleData: blogSearchTitleData } };
 
   } catch (err) {
 
@@ -64,11 +67,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       adminId: '',
       checkLoginStatus: false,
       blogData: [],
+      blogSearchTitleData: [],
     };
 
     const adminId = fallBackData.adminId;
     const checkLoginStatus = fallBackData.checkLoginStatus;
     const blogData = fallBackData.blogData;
+    const blogSearchTitleData = fallBackData.blogSearchTitleData;
 
     // log error
     console.log(err);
@@ -76,7 +81,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const error = err as Error;
     const errorMessage = error.message;
 
-    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, error: errorMessage } };
+    return { props: { adminId: adminId, checkLoginStatus: checkLoginStatus, blogData: blogData, blogSearchTitleData: blogSearchTitleData, error: errorMessage } };
   }
 
 }

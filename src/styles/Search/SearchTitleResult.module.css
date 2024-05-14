@@ -1,0 +1,127 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 50px 0 20px 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 80%;
+    max-width: 1440px;
+}
+
+.cardview {
+    z-index: 1;
+    position: relative;
+    flex-basis: calc(50% - 10px); 
+    padding: 45px 40px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #1e2024, #23272b);
+    box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.cardview::before {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(to right bottom, #212428, #16181c);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.cardview:hover {
+    background: #212427;
+}
+
+.cardview:hover::before {
+    opacity: 1;
+}
+
+.cardviewTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.cardviewTop > h2 {
+    margin-right: 20px;
+    font-weight: 800;
+    font-size: 24px;
+    color: #c4cfde;
+    transition: 0.4s;
+}
+
+.cardview:hover > .cardviewTop > h2 {
+    color: white;
+}
+
+.cardviewTop > div {
+    padding: 0 15px;
+    width: fit-content;
+    min-width: fit-content;
+    height: 36px;
+    font-weight: 800;
+    line-height: 36px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #1e2024, #23272b);
+    box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
+    color: #ff041f;  
+    transition: 0.4s;
+}
+
+.cardview:hover > .cardviewTop > div {
+    background: #1e2025;
+    box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #222527;
+}
+
+.cardviewBottom {
+    color: #878e99;
+    font-size: 18px;
+    transition: 0.4s;
+}
+
+.cardview:hover > .cardviewBottom {
+    color:  #c4cfde;
+}
+
+@media all and (max-width: 1440px) {
+    .cardview {
+        flex-basis: 100%;
+    }    
+}
+
+@media all and (max-width: 1080px) {
+    .cardview {
+        flex-basis: calc(50% - 10px); 
+    }
+}
+
+@media all and (max-width: 840px) {
+    .cardview {
+        flex-basis: 100%;
+    }    
+}
+
+@media all and (max-width: 640px) {
+    .cardviewTop > h2 {
+        font-size: 20px;
+    }
+
+    .cardviewTop > div {
+        font-size: 14px;
+    }
+}
