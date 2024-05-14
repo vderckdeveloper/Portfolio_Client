@@ -126,7 +126,7 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
                     <ol>
                         {/* home */}
                         <div>
-                            <Link className={menu === homeMenu ? styles.active : ''} href={`/`} onClick={() => setMenu(homeMenu)}>
+                            <Link className={menu === homeMenu ? styles.active : ''} href={`/`} onClick={() => { setMenu(homeMenu); onSidebarMenuClose(); }}>
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4cfde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -158,7 +158,7 @@ const SidebarMobile = forwardRef((props: SidebarMobileProps, ref: SidebarMobileR
                                             &&
                                             posts.map(post => {
                                                 return (
-                                                    <Link key={post.blog_index} className={activePost === post.blog_index ? styles.blogPostActive : styles.blogPost} href={`/blog?index=${post.blog_index}`} onClick={() => handlePostClick(post.blog_index)}>
+                                                    <Link key={post.blog_index} className={activePost === post.blog_index ? styles.blogPostActive : styles.blogPost} href={`/blog?index=${post.blog_index}`} onClick={() => { handlePostClick(post.blog_index); onSidebarMenuClose(); }}>
                                                         <div >{post.blog_title}</div>
                                                     </Link>
                                                 );
