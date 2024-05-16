@@ -23,7 +23,7 @@ export default function Home({ adminId, checkLoginStatus, blogData, blogSearchTi
         <meta name="author" content="이승민" />
         <meta name="keywords" content="HTML, CSS, 자바스크립트, 타입스크립트, 리액트, NEXT JS, NGINX, PHP, NODE JS, EXPRESS, NEST JS, MYSQL, MARIA DB, DATABASE" />
         <meta name="description" content="개발자 이승민의 블로그입니다. 컴퓨터 공학 지식과 각종 지식을 한눈에 익혀보아요~! Space, where The Future Begins" />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SearchTitle blogData={blogData} blogSearchTitleData={blogSearchTitleData} error={error} />
