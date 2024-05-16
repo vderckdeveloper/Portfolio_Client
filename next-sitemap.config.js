@@ -9,6 +9,7 @@ const sitemapConfig = {
     exclude: [
         '/admin',
         '/admin/*',
+        '/search/title',
         '/test',
     ],
     robotsTxtOptions: {
@@ -19,6 +20,7 @@ const sitemapConfig = {
                 disallow: [
                     '/admin',
                     '/admin/*',
+                    '/search/title',
                     '/test',
                 ]
             },
