@@ -168,7 +168,7 @@ function Sidebar(props: SidebarProps) {
                                 </g>
                             </svg>
                         </a>
-                        <a className={styles.contactCell} href="https://www.youtube.com/@itestablishmentmundol">
+                        <a className={styles.contactCell} href="https://www.youtube.com/@persistenttitan">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1" id="Icons" viewBox="0 0 32 32" fill="#ffffff" stroke="#ffffff">
                                 <g strokeWidth="0" />
                                 <g strokeLinecap="round" strokeLinejoin="round" />
