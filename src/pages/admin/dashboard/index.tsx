@@ -47,10 +47,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       cache: 'no-store'
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
     // redirect if admin is not logged-in
     if (response.status === 401) {
       return {
@@ -59,6 +55,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           permanent: false,
         },
       };
+    }
+
+    // throw error if response is not 200
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
