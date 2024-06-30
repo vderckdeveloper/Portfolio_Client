@@ -125,13 +125,19 @@
     font-size: 20px;
 }
 
+.editorWrapper > div > div > div > div > div {
+    line-height: 28px;
+}
+
 .editorWrapper > div > div > div > div > ul {
     padding-left: 25px;
+    line-height: 28px;
     list-style: initial;
 }
 
 .editorWrapper > div > div > div > div > ol {
     padding-left: 25px;
+    line-height: 28px;
     list-style: decimal;
 }
 
