@@ -3,5 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: calc(100% - 350px);
+}
+
+@media all and (max-width : 1080px) {
+    .wrapper {
+        width: 100%;
+    }
 }
