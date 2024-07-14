@@ -100,7 +100,7 @@ const ImageComponent: React.FC<ImageProps> = (props) => {
     const { src } = props.contentState.getEntity(props.entityKey).getData();
 
     return (
-        <div style={{ overflow: 'hidden' }}>
+        <div style={{ overflow: 'hidden', maxWidth: 'fit-content' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={src} style={{ display: 'block', borderRadius: '8px', width: '100%', height: '100%', maxWidth: '1000px', maxHeight: '800px' }} alt="블로그 이미지" />
         </div>
