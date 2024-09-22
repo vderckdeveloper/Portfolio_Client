@@ -2,25 +2,20 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import seoulUeduProjectCoverImage from '../../../public/image/main/mainProject/240404_seoulUEdu_projectCover_image.png';
 import portfolioProjectCoverImage from '../../../public/image/main/mainProject/240404_portfolio_projectCover_image.png';
-import rebelProjectCoverImage from '../../../public/image/main/mainProject/240404_rebel_projectCover_image.png';
+import liveStreamingProjectCoverImage from '../../../public/image/main/mainProject/240922_liveStreaming_projectCover_image.png';
 import styles from '@/styles/Main/MainProject.module.css';
 
 // component
 import MainSeoulUEduProject from './MainSeoulUEduProject';
 import MainPortfolioProject from './MainPortfolioProject';
-import LineNotification from '../Notification/LineNotification';
+import MainLiveStreamingProject from './MainLiveStreamingProject';
 
 function MainProject() {
 
     // render project
     const [renderSeoulUEduProject, setRenderSeoulUeduProject] = useState(false);
     const [renderPortfolioProject, setRenderPortfolioProject] = useState(false);
-
-    // render line notification
-    const [renderLineNotification, setRenderLineNotification] = useState(false);
-
-    // line notification
-    const [lineNotificationText, setLineNotifcationText] = useState('');
+    const [renderLiveStreamingProject, setRenderLiveStreamingProject] = useState(false);
 
     const onOpenSeoulUEduProject = () => {
         setRenderSeoulUeduProject(true);
@@ -38,21 +33,13 @@ function MainProject() {
         setRenderPortfolioProject(false);
     }
 
-    const onOpenTheRebelProject = () => {
-        // render line notifcation
-        setLineNotifcationText('인터네셔널 커뮤니티 The Rebel은 아직 개발 착수전입니다. 조금만 기다려주세요.');
-        setRenderLineNotification(true);
+    const onOpenLiveStreamingProject = () => {
+        setRenderLiveStreamingProject(true);
     }
 
-    // hide line notification
-    useEffect(() => {
-        if (renderLineNotification === true) {
-            const timeOut = setTimeout(() => setRenderLineNotification(false), 1500);
-            return () => {
-                clearTimeout(timeOut);
-            }
-        }
-    }, [renderLineNotification]);
+    const onCloseLiveStreamingProject = () => {
+        setRenderLiveStreamingProject(false);
+    }
 
     return (
         <>
@@ -103,7 +90,7 @@ function MainProject() {
                                             <path d="M8.03003 6.85H8.04003C9.14003 6 10.51 5.5 12 5.5C13.51 5.5 14.89 6.01 15.99 6.87H16L15.49 4.4C15 2.5 13.9 2 12.55 2H11.46C10.11 2 9.00003 2.5 8.52003 4.41L8.03003 6.85Z" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         </g>
                                     </svg>
-                                    <span>3M</span>
+                                    <span>1M</span>
                                 </div>
                             </div>
                             <div className={styles.textBox}>
@@ -113,9 +100,9 @@ function MainProject() {
                                 </svg>
                             </div>
                         </div>
-                        <div className={styles.cardview} onClick={onOpenTheRebelProject}>
+                        <div className={styles.cardview} onClick={onOpenLiveStreamingProject}>
                             <div className={styles.imageBox}>
-                                <Image src={rebelProjectCoverImage} width={400} height={295} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
+                                <Image src={liveStreamingProjectCoverImage} width={400} height={295} alt='서울 유 에듀 프로젝트 커버 이미지' quality={100} />
                             </div>
                             <div className={styles.categoryBox}>
                                 <p>Gallery</p>
@@ -130,11 +117,11 @@ function MainProject() {
                                             <path d="M8.03003 6.85H8.04003C9.14003 6 10.51 5.5 12 5.5C13.51 5.5 14.89 6.01 15.99 6.87H16L15.49 4.4C15 2.5 13.9 2 12.55 2H11.46C10.11 2 9.00003 2.5 8.52003 4.41L8.03003 6.85Z" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         </g>
                                     </svg>
-                                    <span>6M</span>
+                                    <span>1M</span>
                                 </div>
                             </div>
                             <div className={styles.textBox}>
-                                <p>REBEL 공식 프로젝트 - 인터네셔널 커뮤니티 플랫폼</p>
+                                <p>화상회의 프로젝트 - N:M 라이브 스트리밍 프로젝트</p>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
                                     <path d="M7 17L17 7M17 7H8M17 7V16" stroke="#ff014f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
@@ -154,9 +141,9 @@ function MainProject() {
                 <MainPortfolioProject onClosePortfolioProject={onClosePortfolioProject} />
             }
             {
-                renderLineNotification
+                renderLiveStreamingProject
                 &&
-                <LineNotification lineNotificationText={lineNotificationText}/>
+                <MainLiveStreamingProject onCloseLiveStreamingProject={onCloseLiveStreamingProject} />
             }
         </>
     )
