@@ -5,7 +5,7 @@ import styles from '@/styles/Main/MainProfile.module.css';
 
 function MainProfie() {
 
-    const words: string[] = ['엔지니어입니다', '개발자입니다', '사업가입니다'];
+    const words: string[] = ['엔지니어입니다', '개발자입니다', '해결사입니다'];
 
     return (
         <article className={styles.container}>
@@ -26,7 +26,7 @@ function MainProfie() {
                                 cursorBlinking={true}
                             />
                         </div>
-                        <p>비전공자로 시작해서, IT 업체를 창업하기까지 많은 노력이 필요했습니다. 웹 개발을 넘어, 인공지능까지 다양한 기술 기업 창업을 목표로 매진하고 있습니다.</p>
+                        <p>비전공자로 시작해서, IT 업체를 창업하기까지 많은 노력이 필요했습니다. 기술에 대한 사랑을 널리 전파하는 것을 목표로 매진하고 있습니다.</p>
                     </div>
                     <div className={styles.skillSetBox}>
                         <h2>Frontend</h2>
